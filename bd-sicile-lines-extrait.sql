@@ -1,110 +1,385 @@
---
--- Base de données : `bd-sicilylines`
---
--- Structure de la table `liaison`
---
+DROP DATABASE IF EXISTS scilyline;
 
-DROP TABLE IF EXISTS `liaison`;
-CREATE TABLE IF NOT EXISTS `liaison` (
-  `id` int(11) NOT NULL,
-  `duree` varchar(5) NOT NULL,
-  `port-depart` int(11) NOT NULL,
-  `port-arrivee` int(11) NOT NULL,
-  `idSecteur` int(2) NOT NULL,
-  KEY `fk-depart` (`port-depart`),
-  KEY `fk-arrivee` (`port-arrivee`),
-  KEY `id` (`id`),
-  KEY `duree` (`duree`),
-  KEY `fk-Secteur` (`idSecteur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE DATABASE IF NOT EXISTS scilyline;
+USE scilyline;
+# -----------------------------------------------------------------------------
+#       TABLE : LIAISON
+# -----------------------------------------------------------------------------
 
---
--- Donn�es de la table `liaison`
---
+CREATE TABLE IF NOT EXISTS LIAISON
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_REGROUPER CHAR(32) NOT NULL  ,
+   ID_DEPART CHAR(32) NOT NULL  ,
+   ID_ARRIVEE CHAR(32) NOT NULL  ,
+   DUREE TIME NOT NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
 
-INSERT INTO `liaison` (`id`, `duree`, `port-depart`, `port-arrivee`, `idSecteur`) VALUES
-(15, '1h30', 1, 2, 1);
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE LIAISON
+# -----------------------------------------------------------------------------
 
 
---
--- Structure de la table `port`
---
+CREATE  INDEX I_FK_LIAISON_SECTEUR
+     ON LIAISON (ID_REGROUPER ASC);
 
-DROP TABLE IF EXISTS `port`;
-CREATE TABLE IF NOT EXISTS `port` (
-  `id` int(11) NOT NULL,
-  `nom` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE  INDEX I_FK_LIAISON_PORT
+     ON LIAISON (ID_DEPART ASC);
 
---
--- Déchargement des données de la table `port`
---
+CREATE  INDEX I_FK_LIAISON_PORT1
+     ON LIAISON (ID_ARRIVEE ASC);
 
-INSERT INTO `port` (`id`, `nom`) VALUES
-(1, 'Palerme'),
-(2, 'Ustica'),
-(3, 'Stromboli'),
-(4, 'Lipari');
+# -----------------------------------------------------------------------------
+#       TABLE : TYPE
+# -----------------------------------------------------------------------------
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS TYPE
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_CLASSER CHAR(32) NOT NULL  ,
+   LIBELLE CHAR(32) NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
 
---
--- Structure de la table `secteur`
---
-
-DROP TABLE IF EXISTS `secteur`;
-CREATE TABLE IF NOT EXISTS `secteur` (
-  `id` int(2) NOT NULL,
-  `nom` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `secteur`
---
-
-INSERT INTO `secteur` (`id`, `nom`) VALUES
-(1, 'Palerme'),
-(2, 'Messine');
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE TYPE
+# -----------------------------------------------------------------------------
 
 
---
--- Structure de la table `traversee`
---
+CREATE  INDEX I_FK_TYPE_CATEGORIE
+     ON TYPE (ID_CLASSER ASC);
 
-DROP TABLE IF EXISTS `traversee`;
-CREATE TABLE IF NOT EXISTS `traversee` (
-  `id` int(2) NOT NULL,
-  `date` date NOT NULL,
-  `heure` time NOT NULL,
-  `id_liaison` int(2) NOT NULL,
-  `id_Bateau` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk-liaison-traversee` (`id_liaison`),
-  KEY `fk-bateau` (`id_Bateau`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+# -----------------------------------------------------------------------------
+#       TABLE : SECTEUR
+# -----------------------------------------------------------------------------
 
---
--- Déchargement des données de la table `traversee`
---
+CREATE TABLE IF NOT EXISTS SECTEUR
+ (
+   ID CHAR(32) NOT NULL  ,
+   LIBELLE CHAR(32) NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
 
-INSERT INTO `traversee` (`num`, `date-traversee`, `heure-traversee`, `code-liaison`, `id-Bateau`) VALUES
-(51000, '2021-09-21', '17:30:00', 15, 1);
+# -----------------------------------------------------------------------------
+#       TABLE : BATEAU
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS BATEAU
+ (
+   ID CHAR(32) NOT NULL  ,
+   NOM CHAR(32) NOT NULL  ,
+   LONGUEUR CHAR(32) NULL  ,
+   LARGEUR CHAR(32) NULL  ,
+   VITESSE CHAR(32) NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : PERIODE
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS PERIODE
+ (
+   ID CHAR(32) NOT NULL  ,
+   DATEDEBUT DATE NULL  ,
+   DATEFIN CHAR(32) NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : PORT
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS PORT
+ (
+   ID CHAR(32) NOT NULL  ,
+   NOM CHAR(32) NOT NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : CLIENT
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CLIENT
+ (
+   ID CHAR(32) NOT NULL  ,
+   NOM CHAR(32) NOT NULL  ,
+   ADRESSE CHAR(32) NULL  ,
+   CP CHAR(32) NULL  ,
+   VILLE CHAR(32) NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : TRAVERSEE
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS TRAVERSEE
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_REALISER CHAR(32) NOT NULL  ,
+   ID_EFFECTUER CHAR(32) NOT NULL  ,
+   DATE DATE NOT NULL  ,
+   HEURE TIME NOT NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE TRAVERSEE
+# -----------------------------------------------------------------------------
 
 
---
--- Contraintes pour la table `liaison`
---
-ALTER TABLE `liaison`
-  ADD CONSTRAINT `fk-Secteur` FOREIGN KEY (`idSecteur`) REFERENCES `secteur` (`id`),
-  ADD CONSTRAINT `fk-arrivee` FOREIGN KEY (`port-arrivee`) REFERENCES `port` (`id`),
-  ADD CONSTRAINT `fk-depart` FOREIGN KEY (`port-depart`) REFERENCES `port` (`id`);
+CREATE  INDEX I_FK_TRAVERSEE_LIAISON
+     ON TRAVERSEE (ID_REALISER ASC);
 
---
--- Contraintes pour la table `traversee`
---
-ALTER TABLE `traversee`
-  ADD CONSTRAINT `fk-bateau` FOREIGN KEY (`id-Bateau`) REFERENCES `bateau` (`id`),
-  ADD CONSTRAINT `fk-liaison-traversee` FOREIGN KEY (`code-liaison`) REFERENCES `liaison` (`code`);
+CREATE  INDEX I_FK_TRAVERSEE_BATEAU
+     ON TRAVERSEE (ID_EFFECTUER ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : RESERVATION
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS RESERVATION
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_RESERVER CHAR(32) NOT NULL  ,
+   ID_CONCERNER CHAR(32) NOT NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE RESERVATION
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_RESERVATION_CLIENT
+     ON RESERVATION (ID_RESERVER ASC);
+
+CREATE  INDEX I_FK_RESERVATION_TRAVERSEE
+     ON RESERVATION (ID_CONCERNER ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : CATEGORIE
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CATEGORIE
+ (
+   ID CHAR(32) NOT NULL  ,
+   LIBELLE CHAR(32) NOT NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : EQUIPEMENT
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS EQUIPEMENT
+ (
+   ID CHAR(32) NOT NULL  ,
+   LIBELLE CHAR(32) NOT NULL  
+   , PRIMARY KEY (ID) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       TABLE : PARTICIPER
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS PARTICIPER
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_1 CHAR(32) NOT NULL  ,
+   NOMBRE CHAR(32) NULL  
+   , PRIMARY KEY (ID,ID_1) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE PARTICIPER
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_PARTICIPER_RESERVATION
+     ON PARTICIPER (ID ASC);
+
+CREATE  INDEX I_FK_PARTICIPER_TYPE
+     ON PARTICIPER (ID_1 ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : PROPOSER
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS PROPOSER
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_1 CHAR(32) NOT NULL  ,
+   QUANTITE CHAR(32) NULL  
+   , PRIMARY KEY (ID,ID_1) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE PROPOSER
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_PROPOSER_BATEAU
+     ON PROPOSER (ID ASC);
+
+CREATE  INDEX I_FK_PROPOSER_EQUIPEMENT
+     ON PROPOSER (ID_1 ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : TARIFER
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS TARIFER
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_1 CHAR(32) NOT NULL  ,
+   ID_2 CHAR(32) NOT NULL  ,
+   TARIF CHAR(32) NULL  
+   , PRIMARY KEY (ID,ID_1,ID_2) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE TARIFER
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_TARIFER_LIAISON
+     ON TARIFER (ID ASC);
+
+CREATE  INDEX I_FK_TARIFER_PERIODE
+     ON TARIFER (ID_1 ASC);
+
+CREATE  INDEX I_FK_TARIFER_TYPE
+     ON TARIFER (ID_2 ASC);
+
+# -----------------------------------------------------------------------------
+#       TABLE : CONTENIR
+# -----------------------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS CONTENIR
+ (
+   ID CHAR(32) NOT NULL  ,
+   ID_1 CHAR(32) NOT NULL  ,
+   NBMAX CHAR(32) NULL  
+   , PRIMARY KEY (ID,ID_1) 
+ ) 
+ comment = "";
+
+# -----------------------------------------------------------------------------
+#       INDEX DE LA TABLE CONTENIR
+# -----------------------------------------------------------------------------
+
+
+CREATE  INDEX I_FK_CONTENIR_BATEAU
+     ON CONTENIR (ID ASC);
+
+CREATE  INDEX I_FK_CONTENIR_CATEGORIE
+     ON CONTENIR (ID_1 ASC);
+
+
+# -----------------------------------------------------------------------------
+#       CREATION DES REFERENCES DE TABLE
+# -----------------------------------------------------------------------------
+
+
+ALTER TABLE LIAISON 
+  ADD FOREIGN KEY FK_LIAISON_SECTEUR (ID_REGROUPER)
+      REFERENCES SECTEUR (ID) ;
+
+
+ALTER TABLE LIAISON 
+  ADD FOREIGN KEY FK_LIAISON_PORT (ID_DEPART)
+      REFERENCES PORT (ID) ;
+
+
+ALTER TABLE LIAISON 
+  ADD FOREIGN KEY FK_LIAISON_PORT1 (ID_ARRIVEE)
+      REFERENCES PORT (ID) ;
+
+
+ALTER TABLE TYPE 
+  ADD FOREIGN KEY FK_TYPE_CATEGORIE (ID_CLASSER)
+      REFERENCES CATEGORIE (ID) ;
+
+
+ALTER TABLE TRAVERSEE 
+  ADD FOREIGN KEY FK_TRAVERSEE_LIAISON (ID_REALISER)
+      REFERENCES LIAISON (ID) ;
+
+
+ALTER TABLE TRAVERSEE 
+  ADD FOREIGN KEY FK_TRAVERSEE_BATEAU (ID_EFFECTUER)
+      REFERENCES BATEAU (ID) ;
+
+
+ALTER TABLE RESERVATION 
+  ADD FOREIGN KEY FK_RESERVATION_CLIENT (ID_RESERVER)
+      REFERENCES CLIENT (ID) ;
+
+
+ALTER TABLE RESERVATION 
+  ADD FOREIGN KEY FK_RESERVATION_TRAVERSEE (ID_CONCERNER)
+      REFERENCES TRAVERSEE (ID) ;
+
+
+ALTER TABLE PARTICIPER 
+  ADD FOREIGN KEY FK_PARTICIPER_RESERVATION (ID)
+      REFERENCES RESERVATION (ID) ;
+
+
+ALTER TABLE PARTICIPER 
+  ADD FOREIGN KEY FK_PARTICIPER_TYPE (ID_1)
+      REFERENCES TYPE (ID) ;
+
+
+ALTER TABLE PROPOSER 
+  ADD FOREIGN KEY FK_PROPOSER_BATEAU (ID)
+      REFERENCES BATEAU (ID) ;
+
+
+ALTER TABLE PROPOSER 
+  ADD FOREIGN KEY FK_PROPOSER_EQUIPEMENT (ID_1)
+      REFERENCES EQUIPEMENT (ID) ;
+
+
+ALTER TABLE TARIFER 
+  ADD FOREIGN KEY FK_TARIFER_LIAISON (ID)
+      REFERENCES LIAISON (ID) ;
+
+
+ALTER TABLE TARIFER 
+  ADD FOREIGN KEY FK_TARIFER_PERIODE (ID_1)
+      REFERENCES PERIODE (ID) ;
+
+
+ALTER TABLE TARIFER 
+  ADD FOREIGN KEY FK_TARIFER_TYPE (ID_2)
+      REFERENCES TYPE (ID) ;
+
+
+ALTER TABLE CONTENIR 
+  ADD FOREIGN KEY FK_CONTENIR_BATEAU (ID)
+      REFERENCES BATEAU (ID) ;
+
+
+ALTER TABLE CONTENIR 
+  ADD FOREIGN KEY FK_CONTENIR_CATEGORIE (ID_1)
+      REFERENCES CATEGORIE (ID) ;
 
