@@ -56,7 +56,7 @@ namespace data_manager.DAL
                     int ID = (int)reader.GetValue(0);
                     string LIBELLE = (string)reader.GetValue(1);
 
-                    //Instanciation d'un Emplye
+                    //Instanciation d'un secteur
                     s = new Secteur(ID, LIBELLE);
 
                     // Ajout de cet Secteur à la liste 
@@ -117,10 +117,13 @@ namespace data_manager.DAL
                 {
 
                     int ID = (int)reader.GetValue(0);
-                    string duree = (string)reader.GetValue(1);
+                    int ID_REGROUPER = (int)reader.GetValue(1);
+                    int ID_DEPART = (int)reader.GetValue(2);
+                    int ID_ARRIVEE = (int)reader.GetValue(3);
+                    string DUREE = (string)reader.GetValue(4);
 
-                    //Instanciation d'un Emplye
-                    l = new Liaison(id, duree, );
+                    //Instanciation d'une liaison
+                    l = new Liaison(ID, DUREE, ID_REGROUPER, ID_DEPART, ID_ARRIVEE);
 
                     // Ajout de cet Liaison à la liste 
                     liaisonList.Add(l);
@@ -150,12 +153,10 @@ namespace data_manager.DAL
 
         }
 
-
-
-        public static List<Liaison> getLiaisons()
+        public static Secteur getSecteursId(int idSecteur)
         {
 
-            List<Liaison> liaisonList = new List<Liaison>();
+            Secteur unSecteur = new Secteur();
 
             try
             {
@@ -166,12 +167,12 @@ namespace data_manager.DAL
                 maConnexionSql.openConnection();
 
 
-                Ocom = maConnexionSql.reqExec("Select * from Liaison");
+                Ocom = maConnexionSql.reqExec("Select * from secteur where ID = " + idSecteur);
 
 
                 MySqlDataReader reader = Ocom.ExecuteReader();
 
-                Liaison l;
+                Secteur s;
 
 
 
@@ -179,14 +180,11 @@ namespace data_manager.DAL
                 while (reader.Read())
                 {
 
-                    int id = (int)reader.GetValue(0);
-                    string duree = (string)reader.GetValue(1);
+                    int ID = (int)reader.GetValue(0);
+                    string LIBELLE = (string)reader.GetValue(1);
 
-                    //Instanciation d'un Emplye
-                    l = new Liaison(id, duree, );
-
-                    // Ajout de cet Liaison à la liste 
-                    liaisonList.Add(l);
+                    //Instanciation d'un secteur
+                    unSecteur = new Secteur(ID, LIBELLE);
 
 
                 }
@@ -198,7 +196,7 @@ namespace data_manager.DAL
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste au Manager
-                return (liaisonList);
+                return (unSecteur);
 
 
             }
@@ -212,6 +210,65 @@ namespace data_manager.DAL
 
 
         }
+
+        public static Port getPortId(int idPort)
+        {
+
+            Port unPort = new Port();
+
+            try
+            {
+
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+
+                maConnexionSql.openConnection();
+
+
+                Ocom = maConnexionSql.reqExec("Select * from port where ID = " + idPort);
+
+
+                MySqlDataReader reader = Ocom.ExecuteReader();
+
+                Port s;
+
+
+
+
+                while (reader.Read())
+                {
+
+                    int ID = (int)reader.GetValue(0);
+                    string NOM = (string)reader.GetValue(1);
+
+                    //Instanciation d'un secteur
+                    unPort = new Port(ID, NOM);
+
+
+                }
+
+
+
+                reader.Close();
+
+                maConnexionSql.closeConnection();
+
+                // Envoi de la liste au Manager
+                return (unPort);
+
+
+            }
+
+            catch (Exception emp)
+            {
+
+                throw (emp);
+
+            }
+
+
+        }
+
 
     }
 }
