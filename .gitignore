@@ -49,5 +49,5 @@ Thumbs.db
 *.wmv
 
 #VsCode IDE
-"Sicily Lines data-base/.vs/"
-"Sicily Lines data-base/data-manager/obj/"
+.vs/
+obj/
