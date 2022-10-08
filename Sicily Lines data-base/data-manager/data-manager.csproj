@@ -92,6 +92,7 @@
     <Compile Include="DAL\ConnexionSql.cs" />
     <Compile Include="DAL\SicilyLinesDAO.cs" />
     <Compile Include="Model\Liaison.cs" />
+    <Compile Include="Model\Port.cs" />
     <Compile Include="Model\Secteur.cs" />
     <Compile Include="Vue\Form1.cs">
       <SubType>Form</SubType>
