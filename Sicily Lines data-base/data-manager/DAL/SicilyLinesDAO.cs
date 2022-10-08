@@ -25,97 +25,63 @@ namespace data_manager.DAL
         private static MySqlCommand Ocom;
 
 
-        // Récupération de la liste des Secteur
-        public static List<Secteur> getSecteurs()
-        {
-
-            List<Secteur> secList = new List<Secteur>();
-
-            try
+        // Récupération de la liste des Secteurs
+            public static List<Secteur> getSecteurs()
             {
 
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                List<Secteur> secList = new List<Secteur>();
 
-
-                maConnexionSql.openConnection();
-
-
-                Ocom = maConnexionSql.reqExec("Select * from secteur");
-
-
-                MySqlDataReader reader = Ocom.ExecuteReader();
-
-                Secteur s;
-
-
-
-
-                while (reader.Read())
+                try
                 {
+                    maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                    maConnexionSql.openConnection();
+                    Ocom = maConnexionSql.reqExec("Select * from secteur");
+                    MySqlDataReader reader = Ocom.ExecuteReader();
+                    Secteur s;
 
-                    int ID = (int)reader.GetValue(0);
-                    string LIBELLE = (string)reader.GetValue(1);
+                    while (reader.Read())
+                    {
+                        int ID = (int)reader.GetValue(0);
+                        string LIBELLE = (string)reader.GetValue(1);
 
-                    //Instanciation d'un secteur
-                    s = new Secteur(ID, LIBELLE);
+                        //Instanciation d'un secteur
+                        s = new Secteur(ID, LIBELLE);
 
-                    // Ajout de cet Secteur à la liste 
-                    secList.Add(s);
+                        // Ajout de cet Secteur à la liste 
+                        secList.Add(s);
+                    }
 
+                    reader.Close();
+                    maConnexionSql.closeConnection();
 
+                    // Envoi de la liste des secteurs
+                    return (secList);
                 }
 
-
-
-                reader.Close();
-
-                maConnexionSql.closeConnection();
-
-                // Envoi de la liste au Manager
-                return (secList);
-
-
-            }
-
-            catch (Exception emp)
-            {
-
-                throw (emp);
+                catch (Exception emp)
+                {
+                    throw (emp);
+                }
 
             }
 
 
-        }
-
-
-
-        public static List<Liaison> getLiaisons()
+        // Récupération de la liste des Liaisons selon un Secteur donné
+        public static List<Liaison> getLiaisons(int idSecteur)
         {
 
             List<Liaison> liaisonList = new List<Liaison>();
 
             try
             {
-
                 maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-
-
                 maConnexionSql.openConnection();
-
-
-                Ocom = maConnexionSql.reqExec("Select * from liaison");
-
-
+                Ocom = maConnexionSql.reqExec("Select * from liaison where ID_REGROUPER = "+ idSecteur);
                 MySqlDataReader reader = Ocom.ExecuteReader();
-
                 Liaison l;
-
-
-
 
                 while (reader.Read())
                 {
-
                     int ID = (int)reader.GetValue(0);
                     int ID_REGROUPER = (int)reader.GetValue(1);
                     int ID_DEPART = (int)reader.GetValue(2);
@@ -127,20 +93,13 @@ namespace data_manager.DAL
 
                     // Ajout de cet Liaison à la liste 
                     liaisonList.Add(l);
-
-
                 }
 
-
-
                 reader.Close();
-
                 maConnexionSql.closeConnection();
 
-                // Envoi de la liste au Manager
+                // Envoi de la liste des liaisons
                 return (liaisonList);
-
-
             }
 
             catch (Exception emp)
@@ -150,9 +109,10 @@ namespace data_manager.DAL
 
             }
 
-
         }
 
+
+        // Récupération d'un Secteur selon un id donnée
         public static Secteur getSecteursId(int idSecteur)
         {
 
@@ -160,57 +120,36 @@ namespace data_manager.DAL
 
             try
             {
-
                 maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-
-
                 maConnexionSql.openConnection();
-
-
                 Ocom = maConnexionSql.reqExec("Select * from secteur where ID = " + idSecteur);
-
-
                 MySqlDataReader reader = Ocom.ExecuteReader();
-
-                Secteur s;
-
-
-
 
                 while (reader.Read())
                 {
-
                     int ID = (int)reader.GetValue(0);
                     string LIBELLE = (string)reader.GetValue(1);
 
                     //Instanciation d'un secteur
                     unSecteur = new Secteur(ID, LIBELLE);
-
-
                 }
 
-
-
                 reader.Close();
-
                 maConnexionSql.closeConnection();
 
-                // Envoi de la liste au Manager
+                // Envoi du secteur
                 return (unSecteur);
-
-
             }
 
             catch (Exception emp)
             {
-
                 throw (emp);
-
             }
-
 
         }
 
+
+        // Récupération d'un Port selon un id donnée
         public static Port getPortId(int idPort)
         {
 
@@ -218,54 +157,31 @@ namespace data_manager.DAL
 
             try
             {
-
                 maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-
-
                 maConnexionSql.openConnection();
-
-
                 Ocom = maConnexionSql.reqExec("Select * from port where ID = " + idPort);
-
-
                 MySqlDataReader reader = Ocom.ExecuteReader();
-
-                Port s;
-
-
-
 
                 while (reader.Read())
                 {
-
                     int ID = (int)reader.GetValue(0);
                     string NOM = (string)reader.GetValue(1);
 
-                    //Instanciation d'un secteur
+                    //Instanciation du port
                     unPort = new Port(ID, NOM);
-
-
                 }
 
-
-
                 reader.Close();
-
                 maConnexionSql.closeConnection();
 
-                // Envoi de la liste au Manager
+                // Envoi du port
                 return (unPort);
-
-
             }
 
             catch (Exception emp)
             {
-
                 throw (emp);
-
             }
-
 
         }
 
