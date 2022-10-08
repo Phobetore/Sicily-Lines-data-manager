@@ -1,18 +1,18 @@
-DROP DATABASE IF EXISTS scilyline;
+DROP DATABASE IF EXISTS `bd-sicilylines`;
 
-CREATE DATABASE IF NOT EXISTS scilyline;
-USE scilyline;
+CREATE DATABASE IF NOT EXISTS `bd-sicilylines`;
+USE `bd-sicilylines`;
 # -----------------------------------------------------------------------------
 #       TABLE : LIAISON
 # -----------------------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS LIAISON
  (
-   ID CHAR(32) NOT NULL  ,
-   ID_REGROUPER CHAR(32) NOT NULL  ,
-   ID_DEPART CHAR(32) NOT NULL  ,
-   ID_ARRIVEE CHAR(32) NOT NULL  ,
-   DUREE TIME NOT NULL  
+   ID INT(32) NOT NULL AUTO_INCREMENT  ,
+   ID_REGROUPER INT(32) NOT NULL  ,
+   ID_DEPART INT(32) NOT NULL  ,
+   ID_ARRIVEE INT(32) NOT NULL  ,
+   DUREE INT NOT NULL  
    , PRIMARY KEY (ID) 
  ) 
  comment = "";
@@ -382,4 +382,3 @@ ALTER TABLE CONTENIR
 ALTER TABLE CONTENIR 
   ADD FOREIGN KEY FK_CONTENIR_CATEGORIE (ID_1)
       REFERENCES CATEGORIE (ID) ;
-

@@ -11,59 +11,54 @@ namespace data_manager.DAL
     internal class SicilyLinesDAO
     {
         private static string provider = "localhost";
-
         private static string dataBase = "bd-sicilylines";
-
         private static string uid = "root";
-
         private static string mdp = "";
 
-
         private static ConnexionSql maConnexionSql;
-
 
         private static MySqlCommand Ocom;
 
 
         // Récupération de la liste des Secteurs
-            public static List<Secteur> getSecteurs()
+        public static List<Secteur> getSecteurs()
+        {
+
+            List<Secteur> secList = new List<Secteur>();
+
+            try
             {
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                Ocom = maConnexionSql.reqExec("Select * from secteur");
+                MySqlDataReader reader = Ocom.ExecuteReader();
+                Secteur s;
 
-                List<Secteur> secList = new List<Secteur>();
-
-                try
+                while (reader.Read())
                 {
-                    maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-                    maConnexionSql.openConnection();
-                    Ocom = maConnexionSql.reqExec("Select * from secteur");
-                    MySqlDataReader reader = Ocom.ExecuteReader();
-                    Secteur s;
+                    int ID = (int)reader.GetValue(0);
+                    string LIBELLE = (string)reader.GetValue(1);
 
-                    while (reader.Read())
-                    {
-                        int ID = (int)reader.GetValue(0);
-                        string LIBELLE = (string)reader.GetValue(1);
+                    //Instanciation d'un secteur
+                    s = new Secteur(ID, LIBELLE);
 
-                        //Instanciation d'un secteur
-                        s = new Secteur(ID, LIBELLE);
-
-                        // Ajout de cet Secteur à la liste 
-                        secList.Add(s);
-                    }
-
-                    reader.Close();
-                    maConnexionSql.closeConnection();
-
-                    // Envoi de la liste des secteurs
-                    return (secList);
+                    // Ajout de cet Secteur à la liste 
+                    secList.Add(s);
                 }
 
-                catch (Exception emp)
-                {
-                    throw (emp);
-                }
+                reader.Close();
+                maConnexionSql.closeConnection();
 
+                // Envoi de la liste des secteurs
+                return (secList);
             }
+
+            catch (Exception error)
+            {
+                throw (error);
+            }
+
+        }
 
 
         // Récupération de la liste des Liaisons selon un Secteur donné
@@ -102,10 +97,10 @@ namespace data_manager.DAL
                 return (liaisonList);
             }
 
-            catch (Exception emp)
+            catch (Exception error)
             {
 
-                throw (emp);
+                throw (error);
 
             }
 
@@ -141,9 +136,9 @@ namespace data_manager.DAL
                 return (unSecteur);
             }
 
-            catch (Exception emp)
+            catch (Exception error)
             {
-                throw (emp);
+                throw (error);
             }
 
         }
@@ -178,11 +173,65 @@ namespace data_manager.DAL
                 return (unPort);
             }
 
-            catch (Exception emp)
+            catch (Exception error)
             {
-                throw (emp);
+                throw (error);
             }
 
+        }
+
+
+        // Modification de la durrée d'une liaison
+        public static void modifLiaison(Liaison updatedLiaison)
+        {
+            try
+            {
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                Ocom = maConnexionSql.reqExec("update liaison set DUREE= '" + updatedLiaison.Duree + "' where ID = " + updatedLiaison.Id);
+                int i = Ocom.ExecuteNonQuery();
+                maConnexionSql.closeConnection();
+            }
+            catch (Exception error)
+            {
+                throw (error);
+            }
+        }
+
+
+        // Modification de la durrée d'une liaison
+        public static void addLiaison(Liaison addedLiaison)
+        {
+            try
+            {
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                Ocom = maConnexionSql.reqExec("INSERT INTO `liaison`(`ID_REGROUPER`, `ID_DEPART`, `ID_ARRIVEE`, `DUREE`) VALUES (," + addedLiaison.SecteurLie.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.Duree + ")");
+                int i = Ocom.ExecuteNonQuery();
+                maConnexionSql.closeConnection();
+            }
+            catch (Exception error)
+            {
+                throw (error);
+            }
+        }
+
+
+        // Suppression d'une liaison
+        public static void suppLiaison(int liaisonId)
+        {
+            try
+            {
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                Ocom = maConnexionSql.reqExec("DELETE FROM liaison WHERE ID = " + liaisonId);
+                int i = Ocom.ExecuteNonQuery();
+                maConnexionSql.closeConnection();
+            }
+            catch (Exception error)
+            {
+                throw (error);
+            }
         }
 
 
