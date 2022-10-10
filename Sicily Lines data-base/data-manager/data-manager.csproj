@@ -94,6 +94,18 @@
     <Compile Include="Model\Liaison.cs" />
     <Compile Include="Model\Port.cs" />
     <Compile Include="Model\Secteur.cs" />
+    <Compile Include="Vue\ConfirmerSupp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vue\ConfirmerSupp.Designer.cs">
+      <DependentUpon>ConfirmerSupp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vue\DureeErreur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vue\DureeErreur.Designer.cs">
+      <DependentUpon>DureeErreur.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vue\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +124,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Vue\ConfirmerSupp.resx">
+      <DependentUpon>ConfirmerSupp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vue\DureeErreur.resx">
+      <DependentUpon>DureeErreur.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vue\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
