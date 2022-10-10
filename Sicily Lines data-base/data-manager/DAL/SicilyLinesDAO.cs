@@ -143,6 +143,50 @@ namespace data_manager.DAL
 
         }
 
+        // Récupération de la list des ports
+
+        public static List<Port> getPorts()
+        {
+
+            List<Port> PortList = new List<Port>();
+
+            try
+            {
+                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                Ocom = maConnexionSql.reqExec("Select * from port");
+                MySqlDataReader reader = Ocom.ExecuteReader();
+                Port p;
+
+                while (reader.Read())
+                {
+                    int ID = (int)reader.GetValue(0);
+                    string NOM = (string)reader.GetValue(1);
+
+                    //Instanciation d'un port
+                    p = new Port(ID, NOM);
+
+                    // Ajout de ce port à la liste 
+                    PortList.Add(p);
+                }
+
+                reader.Close();
+                maConnexionSql.closeConnection();
+
+                // Envoi de la liste des ports
+                return (PortList);
+            }
+
+            catch (Exception error)
+            {
+
+                throw (error);
+
+            }
+
+        }
+
+
 
         // Récupération d'un Port selon un id donnée
         public static Port getPortId(int idPort)

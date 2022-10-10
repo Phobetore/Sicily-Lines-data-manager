@@ -30,7 +30,7 @@ namespace data_manager
                 listBoxSecteur.Items.Add(SicilyLinesDAO.getSecteurs());
             }
 
-
+            ArriveBox.Items.Add(SicilyLinesDAO.getPorts());
         }
     }
 }
