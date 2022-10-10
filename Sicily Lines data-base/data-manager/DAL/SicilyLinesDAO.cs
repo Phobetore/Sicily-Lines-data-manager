@@ -206,7 +206,7 @@ namespace data_manager.DAL
             {
                 maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("INSERT INTO `liaison`(`ID_REGROUPER`, `ID_DEPART`, `ID_ARRIVEE`, `DUREE`) VALUES (," + addedLiaison.SecteurLie.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.Duree + ")");
+                Ocom = maConnexionSql.reqExec("INSERT INTO `liaison`(`ID_REGROUPER`, `ID_DEPART`, `ID_ARRIVEE`, `DUREE`) VALUES (" + addedLiaison.SecteurLie.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.Duree + ")");
                 int i = Ocom.ExecuteNonQuery();
                 maConnexionSql.closeConnection();
             }
