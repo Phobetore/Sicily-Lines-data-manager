@@ -50,6 +50,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.pasDeSecteur = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -284,12 +285,26 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Durée :";
             // 
+            // pasDeSecteur
+            // 
+            this.pasDeSecteur.AutoSize = true;
+            this.pasDeSecteur.BackColor = System.Drawing.Color.White;
+            this.pasDeSecteur.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pasDeSecteur.Location = new System.Drawing.Point(170, 109);
+            this.pasDeSecteur.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.pasDeSecteur.Name = "pasDeSecteur";
+            this.pasDeSecteur.Size = new System.Drawing.Size(104, 14);
+            this.pasDeSecteur.TabIndex = 4;
+            this.pasDeSecteur.Text = "Pas de Secteurs";
+            this.pasDeSecteur.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Orange;
             this.ClientSize = new System.Drawing.Size(708, 341);
+            this.Controls.Add(this.pasDeSecteur);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -299,6 +314,7 @@
             this.Controls.Add(this.listBoxSecteur);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
+            this.Enabled = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -340,6 +356,7 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label pasDeSecteur;
     }
 }
 

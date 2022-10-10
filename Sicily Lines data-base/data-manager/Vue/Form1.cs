@@ -20,7 +20,17 @@ namespace data_manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            listBoxSecteur.Items.Add(SicilyLinesDAO.getSecteurs());
+            if (!SicilyLinesDAO.getSecteurs().Any())
+            {
+                listBoxSecteur.Items.Clear();
+                pasDeSecteur.Visible = true;
+            }
+            else
+            {
+                listBoxSecteur.Items.Add(SicilyLinesDAO.getSecteurs());
+            }
+
+
         }
     }
 }
