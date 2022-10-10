@@ -40,8 +40,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ArriveBox = new System.Windows.Forms.ComboBox();
+            this.Departbox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -50,6 +50,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.pasDeSecteur = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -138,8 +139,8 @@
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.comboBox2);
-            this.groupBox1.Controls.Add(this.comboBox1);
+            this.groupBox1.Controls.Add(this.ArriveBox);
+            this.groupBox1.Controls.Add(this.Departbox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -177,24 +178,24 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Durée:";
             // 
-            // comboBox2
+            // ArriveBox
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(86, 45);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(103, 23);
-            this.comboBox2.TabIndex = 3;
+            this.ArriveBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ArriveBox.FormattingEnabled = true;
+            this.ArriveBox.Location = new System.Drawing.Point(86, 45);
+            this.ArriveBox.Name = "ArriveBox";
+            this.ArriveBox.Size = new System.Drawing.Size(103, 23);
+            this.ArriveBox.TabIndex = 3;
             // 
-            // comboBox1
+            // Departbox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.ItemHeight = 15;
-            this.comboBox1.Location = new System.Drawing.Point(86, 16);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(103, 23);
-            this.comboBox1.TabIndex = 2;
+            this.Departbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Departbox.FormattingEnabled = true;
+            this.Departbox.ItemHeight = 15;
+            this.Departbox.Location = new System.Drawing.Point(86, 16);
+            this.Departbox.Name = "Departbox";
+            this.Departbox.Size = new System.Drawing.Size(103, 23);
+            this.Departbox.TabIndex = 2;
             // 
             // label6
             // 
@@ -284,12 +285,26 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Durée :";
             // 
+            // pasDeSecteur
+            // 
+            this.pasDeSecteur.AutoSize = true;
+            this.pasDeSecteur.BackColor = System.Drawing.Color.White;
+            this.pasDeSecteur.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pasDeSecteur.Location = new System.Drawing.Point(170, 109);
+            this.pasDeSecteur.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.pasDeSecteur.Name = "pasDeSecteur";
+            this.pasDeSecteur.Size = new System.Drawing.Size(104, 14);
+            this.pasDeSecteur.TabIndex = 4;
+            this.pasDeSecteur.Text = "Pas de Secteurs";
+            this.pasDeSecteur.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Orange;
             this.ClientSize = new System.Drawing.Size(708, 341);
+            this.Controls.Add(this.pasDeSecteur);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
@@ -299,6 +314,7 @@
             this.Controls.Add(this.listBoxSecteur);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
+            this.Enabled = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -335,11 +351,12 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox Departbox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox ArriveBox;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label pasDeSecteur;
     }
 }
 
