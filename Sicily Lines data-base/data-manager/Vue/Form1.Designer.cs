@@ -37,20 +37,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.InsererBtn = new System.Windows.Forms.Button();
+            this.dureeBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.ArriveBox = new System.Windows.Forms.ComboBox();
+            this.ArriveeBox = new System.Windows.Forms.ComboBox();
             this.DepartBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.suppBtn = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.majBtn = new System.Windows.Forms.Button();
+            this.majBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.pasDeSecteur = new System.Windows.Forms.Label();
+            this.pasDeLiaisons = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -96,10 +97,10 @@
             // 
             this.listBoxSecteur.BackColor = System.Drawing.Color.WhiteSmoke;
             this.listBoxSecteur.FormattingEnabled = true;
-            this.listBoxSecteur.Location = new System.Drawing.Point(166, 64);
+            this.listBoxSecteur.Location = new System.Drawing.Point(158, 64);
             this.listBoxSecteur.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxSecteur.Name = "listBoxSecteur";
-            this.listBoxSecteur.Size = new System.Drawing.Size(112, 108);
+            this.listBoxSecteur.Size = new System.Drawing.Size(107, 108);
             this.listBoxSecteur.TabIndex = 3;
             this.listBoxSecteur.SelectedIndexChanged += new System.EventHandler(this.listBoxSecteur_SelectedIndexChanged);
             // 
@@ -107,10 +108,10 @@
             // 
             this.listBoxLiaison.BackColor = System.Drawing.Color.WhiteSmoke;
             this.listBoxLiaison.FormattingEnabled = true;
-            this.listBoxLiaison.Location = new System.Drawing.Point(405, 64);
+            this.listBoxLiaison.Location = new System.Drawing.Point(390, 64);
             this.listBoxLiaison.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxLiaison.Name = "listBoxLiaison";
-            this.listBoxLiaison.Size = new System.Drawing.Size(201, 121);
+            this.listBoxLiaison.Size = new System.Drawing.Size(307, 121);
             this.listBoxLiaison.TabIndex = 4;
             // 
             // label2
@@ -138,10 +139,10 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.InsererBtn);
+            this.groupBox1.Controls.Add(this.dureeBox);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.ArriveBox);
+            this.groupBox1.Controls.Add(this.ArriveeBox);
             this.groupBox1.Controls.Add(this.DepartBox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label4);
@@ -155,21 +156,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Insertion";
             // 
-            // button3
+            // InsererBtn
             // 
-            this.button3.Location = new System.Drawing.Point(61, 101);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(78, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Inserer";
-            this.button3.UseVisualStyleBackColor = true;
+            this.InsererBtn.Location = new System.Drawing.Point(61, 101);
+            this.InsererBtn.Name = "InsererBtn";
+            this.InsererBtn.Size = new System.Drawing.Size(78, 23);
+            this.InsererBtn.TabIndex = 6;
+            this.InsererBtn.Text = "Inserer";
+            this.InsererBtn.UseVisualStyleBackColor = true;
+            this.InsererBtn.Click += new System.EventHandler(this.InsererBtn_Click);
             // 
-            // textBox1
+            // dureeBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(86, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(103, 21);
-            this.textBox1.TabIndex = 5;
+            this.dureeBox.Location = new System.Drawing.Point(86, 74);
+            this.dureeBox.Name = "dureeBox";
+            this.dureeBox.Size = new System.Drawing.Size(103, 21);
+            this.dureeBox.TabIndex = 5;
             // 
             // label7
             // 
@@ -180,14 +182,14 @@
             this.label7.TabIndex = 4;
             this.label7.Text = "Durée:";
             // 
-            // ArriveBox
+            // ArriveeBox
             // 
-            this.ArriveBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ArriveBox.FormattingEnabled = true;
-            this.ArriveBox.Location = new System.Drawing.Point(86, 45);
-            this.ArriveBox.Name = "ArriveBox";
-            this.ArriveBox.Size = new System.Drawing.Size(103, 23);
-            this.ArriveBox.TabIndex = 3;
+            this.ArriveeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ArriveeBox.FormattingEnabled = true;
+            this.ArriveeBox.Location = new System.Drawing.Point(86, 45);
+            this.ArriveeBox.Name = "ArriveeBox";
+            this.ArriveeBox.Size = new System.Drawing.Size(103, 23);
+            this.ArriveeBox.TabIndex = 3;
             // 
             // DepartBox
             // 
@@ -220,7 +222,7 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.suppBtn);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(287, 215);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
@@ -231,22 +233,23 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Supression";
             // 
-            // button1
+            // suppBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button1.Location = new System.Drawing.Point(35, 41);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(77, 27);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Supprimer";
-            this.button1.UseVisualStyleBackColor = false;
+            this.suppBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.suppBtn.Location = new System.Drawing.Point(35, 41);
+            this.suppBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.suppBtn.Name = "suppBtn";
+            this.suppBtn.Size = new System.Drawing.Size(77, 27);
+            this.suppBtn.TabIndex = 0;
+            this.suppBtn.Text = "Supprimer";
+            this.suppBtn.UseVisualStyleBackColor = false;
+            this.suppBtn.Click += new System.EventHandler(this.suppBtn_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.BackColor = System.Drawing.Color.SkyBlue;
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.textBox2);
+            this.groupBox3.Controls.Add(this.majBtn);
+            this.groupBox3.Controls.Add(this.majBox);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(473, 215);
@@ -258,24 +261,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mise à jour";
             // 
-            // button2
+            // majBtn
             // 
-            this.button2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.button2.Location = new System.Drawing.Point(44, 63);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(67, 21);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "MAJ";
-            this.button2.UseVisualStyleBackColor = false;
+            this.majBtn.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.majBtn.Location = new System.Drawing.Point(44, 63);
+            this.majBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.majBtn.Name = "majBtn";
+            this.majBtn.Size = new System.Drawing.Size(67, 21);
+            this.majBtn.TabIndex = 2;
+            this.majBtn.Text = "MAJ";
+            this.majBtn.UseVisualStyleBackColor = false;
+            this.majBtn.Click += new System.EventHandler(this.majBtn_Click);
             // 
-            // textBox2
+            // majBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(61, 29);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(87, 21);
-            this.textBox2.TabIndex = 1;
+            this.majBox.Location = new System.Drawing.Point(61, 29);
+            this.majBox.Margin = new System.Windows.Forms.Padding(2);
+            this.majBox.Name = "majBox";
+            this.majBox.Size = new System.Drawing.Size(87, 21);
+            this.majBox.TabIndex = 1;
             // 
             // label5
             // 
@@ -292,7 +296,7 @@
             this.pasDeSecteur.AutoSize = true;
             this.pasDeSecteur.BackColor = System.Drawing.Color.White;
             this.pasDeSecteur.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pasDeSecteur.Location = new System.Drawing.Point(170, 109);
+            this.pasDeSecteur.Location = new System.Drawing.Point(160, 109);
             this.pasDeSecteur.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.pasDeSecteur.Name = "pasDeSecteur";
             this.pasDeSecteur.Size = new System.Drawing.Size(104, 14);
@@ -300,12 +304,26 @@
             this.pasDeSecteur.Text = "Pas de Secteurs";
             this.pasDeSecteur.Visible = false;
             // 
+            // pasDeLiaisons
+            // 
+            this.pasDeLiaisons.AutoSize = true;
+            this.pasDeLiaisons.BackColor = System.Drawing.Color.White;
+            this.pasDeLiaisons.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pasDeLiaisons.Location = new System.Drawing.Point(495, 114);
+            this.pasDeLiaisons.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.pasDeLiaisons.Name = "pasDeLiaisons";
+            this.pasDeLiaisons.Size = new System.Drawing.Size(99, 14);
+            this.pasDeLiaisons.TabIndex = 10;
+            this.pasDeLiaisons.Text = "Pas de Liaisons";
+            this.pasDeLiaisons.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Orange;
             this.ClientSize = new System.Drawing.Size(708, 383);
+            this.Controls.Add(this.pasDeLiaisons);
             this.Controls.Add(this.pasDeSecteur);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -345,19 +363,20 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button suppBtn;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox majBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button majBtn;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox DepartBox;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox ArriveBox;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox ArriveeBox;
+        private System.Windows.Forms.Button InsererBtn;
+        private System.Windows.Forms.TextBox dureeBox;
         private System.Windows.Forms.Label pasDeSecteur;
+        private System.Windows.Forms.Label pasDeLiaisons;
     }
 }
 

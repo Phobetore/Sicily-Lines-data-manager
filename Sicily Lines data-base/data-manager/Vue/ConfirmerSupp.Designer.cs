@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.OuiBtn = new System.Windows.Forms.Button();
+            this.NonBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -43,31 +43,33 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "ATTENTION ! Etes vous sur de vouloir supprimer cette Liaison ?";
             // 
-            // button1
+            // OuiBtn
             // 
-            this.button1.Location = new System.Drawing.Point(68, 80);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "OUI";
-            this.button1.UseVisualStyleBackColor = true;
+            this.OuiBtn.Location = new System.Drawing.Point(68, 80);
+            this.OuiBtn.Name = "OuiBtn";
+            this.OuiBtn.Size = new System.Drawing.Size(110, 23);
+            this.OuiBtn.TabIndex = 2;
+            this.OuiBtn.Text = "OUI";
+            this.OuiBtn.UseVisualStyleBackColor = true;
+            this.OuiBtn.Click += new System.EventHandler(this.OuiBtn_Click);
             // 
-            // button2
+            // NonBtn
             // 
-            this.button2.Location = new System.Drawing.Point(264, 80);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "NON";
-            this.button2.UseVisualStyleBackColor = true;
+            this.NonBtn.Location = new System.Drawing.Point(264, 80);
+            this.NonBtn.Name = "NonBtn";
+            this.NonBtn.Size = new System.Drawing.Size(110, 23);
+            this.NonBtn.TabIndex = 3;
+            this.NonBtn.Text = "NON";
+            this.NonBtn.UseVisualStyleBackColor = true;
+            this.NonBtn.Click += new System.EventHandler(this.NonBtn_Click);
             // 
             // ConfirmerSupp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(453, 133);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.NonBtn);
+            this.Controls.Add(this.OuiBtn);
             this.Controls.Add(this.label1);
             this.Name = "ConfirmerSupp";
             this.Text = "ConfirmerSupp";
@@ -79,7 +81,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button OuiBtn;
+        private System.Windows.Forms.Button NonBtn;
     }
 }
