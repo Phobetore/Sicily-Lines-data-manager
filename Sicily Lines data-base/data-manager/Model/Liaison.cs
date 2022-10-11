@@ -22,10 +22,10 @@ namespace data_manager.Model
         public Port PortArrivee { get => portArrivee; set => portArrivee = value; }
 
 
-        public Liaison(int id, string nom, Secteur secteurLie, Port portDepart, Port portArrivee)
+        public Liaison(int id, string duree, Secteur secteurLie, Port portDepart, Port portArrivee)
         {
             this.id = id;
-            this.duree = nom;
+            this.duree = duree;
             this.secteurLie = secteurLie;
             this.portDepart = portDepart;
             this.portArrivee = portArrivee;
