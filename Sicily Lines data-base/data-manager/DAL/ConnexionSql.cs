@@ -5,6 +5,7 @@ using System.Text;
 using System.Data.OleDb;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace data_manager
 {
@@ -61,14 +62,10 @@ namespace data_manager
 
                 try
                 {
-
-
                     if (null == connection)
                     { // Premier appel
                         connection = new ConnexionSql(unProvider, uneDataBase, unUid, unMdp);
-
                     }
-
                 }
                 catch (Exception emp)
                 {
@@ -79,10 +76,13 @@ namespace data_manager
                 return connection;
 
             }
+
         }
 
-
-
+        public MySqlConnection getLeTrucChiant()
+        {
+            return this.mysqlCn;
+        }
 
 
         /**

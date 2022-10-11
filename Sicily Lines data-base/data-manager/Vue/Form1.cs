@@ -1,4 +1,5 @@
 ﻿using data_manager.DAL;
+using data_manager.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,10 +28,22 @@ namespace data_manager
             }
             else
             {
-                listBoxSecteur.Items.Add(SicilyLinesDAO.getSecteurs());
+                listBoxSecteur.DataSource = SicilyLinesDAO.getSecteurs();
+                // listBoxSecteur.DisplayMember = ;
             }
+            foreach (var item in SicilyLinesDAO.getPorts())
+            {
+                ArriveBox.Items.Add(item);
+                DepartBox.Items.Add(item);
+            }
+        }
 
-            ArriveBox.Items.Add(SicilyLinesDAO.getPorts());
+
+        private void listBoxSecteur_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(listBoxSecteur.SelectedIndex + 1);
+
+            // listBoxLiaison.DisplayMember = ;
         }
     }
 }

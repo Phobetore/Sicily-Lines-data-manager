@@ -28,7 +28,7 @@ namespace data_manager.Model
 
         public override string ToString()
         {
-            return this.id.ToString() + " : " + this.nom;
+            return this.nom;
         }
     }
 }

@@ -10,14 +10,12 @@ namespace data_manager.DAL
 {
     internal class SicilyLinesDAO
     {
-        private static string provider = "localhost";
+        private static string provider = "127.0.0.1";
         private static string dataBase = "bd-sicilylines";
         private static string uid = "root";
         private static string mdp = "";
+        
 
-        private static ConnexionSql maConnexionSql;
-
-        private static MySqlCommand Ocom;
 
 
         // Récupération de la liste des Secteurs
@@ -28,25 +26,26 @@ namespace data_manager.DAL
 
             try
             {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("Select * from secteur");
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                string req = "Select * from secteur";
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlDataReader readerS = Ocom.ExecuteReader();
                 Secteur s;
 
-                while (reader.Read())
+                while (readerS.Read())
                 {
-                    int ID = (int)reader.GetValue(0);
-                    string LIBELLE = (string)reader.GetValue(1);
+                    int ID = (int)readerS["id"];
+                    string NOM = (string)readerS["nom"];
+                   
+                    s = new Secteur(ID, NOM);
 
-                    //Instanciation d'un secteur
-                    s = new Secteur(ID, LIBELLE);
-
-                    // Ajout de cet Secteur à la liste 
+                    // Ajout de cet Liaison à la liste 
                     secList.Add(s);
                 }
 
-                reader.Close();
+                readerS.Close();
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste des secteurs
@@ -69,28 +68,33 @@ namespace data_manager.DAL
 
             try
             {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                List<Secteur> listSecteursDeLiaison= getSecteurs();
+                List<Port> listPortsDeLiaison= getPorts();
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("Select * from liaison where ID_REGROUPER = "+ idSecteur);
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                string req = "Select * from liaison where id = ?idSecteur ";
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                Ocom.Parameters.Add(new MySqlParameter("idSecteur", idSecteur));
+
+                MySqlDataReader readerL = Ocom.ExecuteReader();
                 Liaison l;
 
-                while (reader.Read())
-                {
-                    int ID = (int)reader.GetValue(0);
-                    int ID_REGROUPER = (int)reader.GetValue(1);
-                    int ID_DEPART = (int)reader.GetValue(2);
-                    int ID_ARRIVEE = (int)reader.GetValue(3);
-                    string DUREE = (string)reader.GetValue(4);
 
-                    //Instanciation d'une liaison
-                    l = new Liaison(ID, DUREE, ID_REGROUPER, ID_DEPART, ID_ARRIVEE);
+                while (readerL.Read())
+                {
+                    int ID = (int) readerL["id"];
+                    string DUREE = (string) readerL["duree"];
+                    Port PORT_DEPART = (Port) listPortsDeLiaison[Convert.ToInt32(readerL["port-depart"])];
+                    Port PORT_ARRIVEE = (Port) listPortsDeLiaison[Convert.ToInt32(readerL["port-arrivee"])];
+                    Secteur ID_SECTEUR = (Secteur)listSecteursDeLiaison[Convert.ToInt32(readerL["id-secteur"])];
+
+                    l = new Liaison(ID, DUREE, ID_SECTEUR, PORT_DEPART, PORT_ARRIVEE);
 
                     // Ajout de cet Liaison à la liste 
                     liaisonList.Add(l);
                 }
 
-                reader.Close();
+                readerL.Close();
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste des liaisons
@@ -107,74 +111,38 @@ namespace data_manager.DAL
         }
 
 
-        // Récupération d'un Secteur selon un id donnée
-        public static Secteur getSecteursId(int idSecteur)
-        {
-
-            Secteur unSecteur = new Secteur();
-
-            try
-            {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-                maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("Select * from secteur where ID = " + idSecteur);
-                MySqlDataReader reader = Ocom.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    int ID = (int)reader.GetValue(0);
-                    string LIBELLE = (string)reader.GetValue(1);
-
-                    //Instanciation d'un secteur
-                    unSecteur = new Secteur(ID, LIBELLE);
-                }
-
-                reader.Close();
-                maConnexionSql.closeConnection();
-
-                // Envoi du secteur
-                return (unSecteur);
-            }
-
-            catch (Exception error)
-            {
-                throw (error);
-            }
-
-        }
-
         // Récupération de la list des ports
 
         public static List<Port> getPorts()
         {
 
-            List<Port> PortList = new List<Port>();
+            List<Port> portList = new List<Port>();
 
             try
             {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("Select * from port");
-                MySqlDataReader reader = Ocom.ExecuteReader();
+                string req = "Select * from port";
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlDataReader readerP = Ocom.ExecuteReader();
                 Port p;
 
-                while (reader.Read())
+                while (readerP.Read())
                 {
-                    int ID = (int)reader.GetValue(0);
-                    string NOM = (string)reader.GetValue(1);
+                    int ID = (int)readerP["id"];
+                    string NOM = (string)readerP["nom"];
 
-                    //Instanciation d'un port
                     p = new Port(ID, NOM);
 
-                    // Ajout de ce port à la liste 
-                    PortList.Add(p);
+                    // Ajout de cet Liaison à la liste 
+                    portList.Add(p);
                 }
 
-                reader.Close();
+                readerP.Close();
                 maConnexionSql.closeConnection();
 
                 // Envoi de la liste des ports
-                return (PortList);
+                return (portList);
             }
 
             catch (Exception error)
@@ -186,43 +154,6 @@ namespace data_manager.DAL
 
         }
 
-
-
-        // Récupération d'un Port selon un id donnée
-        public static Port getPortId(int idPort)
-        {
-
-            Port unPort = new Port();
-
-            try
-            {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
-                maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("Select * from port where ID = " + idPort);
-                MySqlDataReader reader = Ocom.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    int ID = (int)reader.GetValue(0);
-                    string NOM = (string)reader.GetValue(1);
-
-                    //Instanciation du port
-                    unPort = new Port(ID, NOM);
-                }
-
-                reader.Close();
-                maConnexionSql.closeConnection();
-
-                // Envoi du port
-                return (unPort);
-            }
-
-            catch (Exception error)
-            {
-                throw (error);
-            }
-
-        }
 
 
         // Modification de la durrée d'une liaison
@@ -230,9 +161,10 @@ namespace data_manager.DAL
         {
             try
             {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("update liaison set DUREE= '" + updatedLiaison.Duree + "' where ID = " + updatedLiaison.Id);
+                MySqlCommand Ocom = maConnexionSql.reqExec("update liaison set DUREE= '" + updatedLiaison.Duree + "' where ID = " + updatedLiaison.Id);
                 int i = Ocom.ExecuteNonQuery();
                 maConnexionSql.closeConnection();
             }
@@ -248,9 +180,10 @@ namespace data_manager.DAL
         {
             try
             {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("INSERT INTO `liaison`(`ID_REGROUPER`, `ID_DEPART`, `ID_ARRIVEE`, `DUREE`) VALUES (" + addedLiaison.SecteurLie.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.Duree + ")");
+                MySqlCommand Ocom = maConnexionSql.reqExec("INSERT INTO `liaison`(`ID_REGROUPER`, `ID_DEPART`, `ID_ARRIVEE`, `DUREE`) VALUES (" + addedLiaison.SecteurLie.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.PortDepart.Id + "," + addedLiaison.Duree + ")");
                 int i = Ocom.ExecuteNonQuery();
                 maConnexionSql.closeConnection();
             }
@@ -266,9 +199,10 @@ namespace data_manager.DAL
         {
             try
             {
-                maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                Ocom = maConnexionSql.reqExec("DELETE FROM liaison WHERE ID = " + liaisonId);
+                MySqlCommand Ocom = maConnexionSql.reqExec("DELETE FROM liaison WHERE ID = " + liaisonId);
                 int i = Ocom.ExecuteNonQuery();
                 maConnexionSql.closeConnection();
             }

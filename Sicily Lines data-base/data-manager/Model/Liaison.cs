@@ -22,13 +22,13 @@ namespace data_manager.Model
         public Port PortArrivee { get => portArrivee; set => portArrivee = value; }
 
 
-        public Liaison(int id, string nom, int idSecteur, int idDepart, int idArrivee)
+        public Liaison(int id, string nom, Secteur secteurLie, Port portDepart, Port portArrivee)
         {
             this.id = id;
             this.duree = nom;
-            this.secteurLie = SicilyLinesDAO.getSecteursId(idSecteur);
-            this.portDepart = SicilyLinesDAO.getPortId(idDepart);
-            this.portArrivee = SicilyLinesDAO.getPortId(idArrivee);
+            this.secteurLie = secteurLie;
+            this.portDepart = portDepart;
+            this.portArrivee = portArrivee;
         }
 
         public Liaison()
