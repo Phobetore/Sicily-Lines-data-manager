@@ -41,7 +41,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.ArriveBox = new System.Windows.Forms.ComboBox();
-            this.Departbox = new System.Windows.Forms.ComboBox();
+            this.DepartBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -60,6 +60,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.ErrorImage = null;
             this.pictureBox1.Image = global::data_manager.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(1, 1);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -100,6 +101,7 @@
             this.listBoxSecteur.Name = "listBoxSecteur";
             this.listBoxSecteur.Size = new System.Drawing.Size(112, 108);
             this.listBoxSecteur.TabIndex = 3;
+            this.listBoxSecteur.SelectedIndexChanged += new System.EventHandler(this.listBoxSecteur_SelectedIndexChanged);
             // 
             // listBoxLiaison
             // 
@@ -140,7 +142,7 @@
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.ArriveBox);
-            this.groupBox1.Controls.Add(this.Departbox);
+            this.groupBox1.Controls.Add(this.DepartBox);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -187,15 +189,15 @@
             this.ArriveBox.Size = new System.Drawing.Size(103, 23);
             this.ArriveBox.TabIndex = 3;
             // 
-            // Departbox
+            // DepartBox
             // 
-            this.Departbox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Departbox.FormattingEnabled = true;
-            this.Departbox.ItemHeight = 15;
-            this.Departbox.Location = new System.Drawing.Point(86, 16);
-            this.Departbox.Name = "Departbox";
-            this.Departbox.Size = new System.Drawing.Size(103, 23);
-            this.Departbox.TabIndex = 2;
+            this.DepartBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DepartBox.FormattingEnabled = true;
+            this.DepartBox.ItemHeight = 15;
+            this.DepartBox.Location = new System.Drawing.Point(86, 16);
+            this.DepartBox.Name = "DepartBox";
+            this.DepartBox.Size = new System.Drawing.Size(103, 23);
+            this.DepartBox.TabIndex = 2;
             // 
             // label6
             // 
@@ -303,7 +305,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Orange;
-            this.ClientSize = new System.Drawing.Size(708, 341);
+            this.ClientSize = new System.Drawing.Size(708, 383);
             this.Controls.Add(this.pasDeSecteur);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -314,7 +316,6 @@
             this.Controls.Add(this.listBoxSecteur);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
-            this.Enabled = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
@@ -351,7 +352,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox Departbox;
+        private System.Windows.Forms.ComboBox DepartBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox ArriveBox;
         private System.Windows.Forms.Button button3;
