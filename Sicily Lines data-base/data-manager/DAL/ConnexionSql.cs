@@ -79,7 +79,7 @@ namespace data_manager
 
         }
 
-        public MySqlConnection getLeTrucChiant()
+        public MySqlConnection getmysalCn()
         {
             return this.mysqlCn;
         }
