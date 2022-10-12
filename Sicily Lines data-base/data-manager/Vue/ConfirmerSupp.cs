@@ -23,6 +23,7 @@ namespace data_manager.Vue
         {
             InitializeComponent();
 
+            // Initialisation des variables depuis les parametres
             this.supp_liaison = supp_liaison;
             this.listBoxLiaison = listBoxLiaison;
             this.secteurId = secteurId;
@@ -31,14 +32,20 @@ namespace data_manager.Vue
 
         private void OuiBtn_Click(object sender, EventArgs e)
         {
+            // Suppression de la Liaison selon une id donnée
             SicilyLinesDAO.suppLiaison(supp_liaison.Id);
+
+            // Actualisation de la listBoxLiaison
             listBoxLiaison.DataSource = null;
             listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(secteurId);
+
+            // Fermeture de la fenetre
             this.Close();
         }
 
         private void NonBtn_Click(object sender, EventArgs e)
         {
+            // Fermeture de la fenetre
             this.Close();
         }
     }

@@ -38,7 +38,7 @@ namespace data_manager.Model
 
         public override string ToString()
         {
-            return "Secteur : " + this.SecteurLie.Libelle + " -  Durée : " + this.duree + " - Depart : " + this.portDepart.Nom + " - Arrivee : " + this.portArrivee.Nom;
+            return " - Depart : " + this.portDepart.Nom + " -  Durée : " + this.duree + " - Arrivee : " + this.portArrivee.Nom;
         }
     }
 }
