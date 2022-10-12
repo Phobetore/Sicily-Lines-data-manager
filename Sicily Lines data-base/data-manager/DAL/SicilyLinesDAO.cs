@@ -47,7 +47,7 @@ namespace data_manager.DAL
                         //Instanciation d'un secteur
                         s = new Secteur(ID, LIBELLE);
 
-                        // Ajout de cet Secteur à la liste 
+                        // Ajout d'un secteur à la liste 
                         secList.Add(s);
                     }
 
