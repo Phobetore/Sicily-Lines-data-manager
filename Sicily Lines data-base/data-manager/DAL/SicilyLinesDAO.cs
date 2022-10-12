@@ -31,7 +31,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "Select * from secteur";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 
                 // execution de la requete
                 MySqlDataReader readerS = Ocom.ExecuteReader();
@@ -81,7 +81,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "Select * from liaison";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
 
                 // Execution de la requete
                 MySqlDataReader readerL = Ocom.ExecuteReader();
@@ -139,7 +139,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "Select * from liaison where `id-secteur` = ?idSecteur ";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 Ocom.Parameters.Add(new MySqlParameter("idSecteur", idSecteur));
 
                 // Execution de la requete
@@ -191,7 +191,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "Select * from port";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
 
                 // Execution de la requete
                 MySqlDataReader readerP = Ocom.ExecuteReader();
@@ -238,7 +238,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "update liaison set duree = '?updatedDuree' where id = ?idToUpdate";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 Ocom.Parameters.Add(new MySqlParameter("updatedDuree", updatedLiaison.Duree));
                 Ocom.Parameters.Add(new MySqlParameter("idToUpdate", updatedLiaison.Id));
 
@@ -262,7 +262,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "INSERT INTO `liaison`(`id`, `id-secteur`, `port-depart`, `port-arrivee`, `duree`) VALUES (?newId, ?newSecteurId, ?newDepartId, ?newArriveeId, ?newDuree )";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 Ocom.Parameters.Add(new MySqlParameter("newId", addedLiaison.Id));
                 Ocom.Parameters.Add(new MySqlParameter("newSecteurId", addedLiaison.SecteurLie.Id));
                 Ocom.Parameters.Add(new MySqlParameter("newDepartId", addedLiaison.PortDepart.Id));
@@ -289,7 +289,7 @@ namespace data_manager.DAL
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
                 string req = "DELETE FROM liaison WHERE id = ?liaisonId";
-                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getLeTrucChiant());
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 Ocom.Parameters.Add(new MySqlParameter("liaisonId", liaisonId));
 
                 // Execution de la requte
