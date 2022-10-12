@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmerSupp));
             this.label1 = new System.Windows.Forms.Label();
             this.OuiBtn = new System.Windows.Forms.Button();
             this.NonBtn = new System.Windows.Forms.Button();
@@ -71,8 +72,9 @@
             this.Controls.Add(this.NonBtn);
             this.Controls.Add(this.OuiBtn);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConfirmerSupp";
-            this.Text = "ConfirmerSupp";
+            this.Text = "Sicily Lines";
             this.ResumeLayout(false);
             this.PerformLayout();
 

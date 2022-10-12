@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DureeErreur));
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -59,8 +60,9 @@
             this.ClientSize = new System.Drawing.Size(347, 104);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DureeErreur";
-            this.Text = "DureeErreur";
+            this.Text = "Sicily Lines";
             this.ResumeLayout(false);
             this.PerformLayout();
 
