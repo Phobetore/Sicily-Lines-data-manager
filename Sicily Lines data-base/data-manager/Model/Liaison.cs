@@ -22,13 +22,13 @@ namespace data_manager.Model
         public Port PortArrivee { get => portArrivee; set => portArrivee = value; }
 
 
-        public Liaison(int id, string nom, int idSecteur, int idDepart, int idArrivee)
+        public Liaison(int id, string duree, Secteur secteurLie, Port portDepart, Port portArrivee)
         {
             this.id = id;
-            this.duree = nom;
-            this.secteurLie = SicilyLinesDAO.getSecteursId(idSecteur);
-            this.portDepart = SicilyLinesDAO.getPortId(idDepart);
-            this.portArrivee = SicilyLinesDAO.getPortId(idArrivee);
+            this.duree = duree;
+            this.secteurLie = secteurLie;
+            this.portDepart = portDepart;
+            this.portArrivee = portArrivee;
         }
 
         public Liaison()
@@ -38,7 +38,7 @@ namespace data_manager.Model
 
         public override string ToString()
         {
-            return "Secteur : " + this.SecteurLie.Libelle + " -  Durée : " + this.duree + " - Depart : " + this.portDepart.Nom + " - Arrivee : " + this.portArrivee.Nom;
+            return " - Depart : " + this.portDepart.Nom + " -  Durée : " + this.duree + " - Arrivee : " + this.portArrivee.Nom;
         }
     }
 }
