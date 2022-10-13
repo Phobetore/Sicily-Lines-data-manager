@@ -27,23 +27,17 @@ namespace data_manager.Vue
             string login= LoginBox.Text;
             string mdp = MdpBox.Text;
             
-      
-    
-                if ( SecureLoging.checkcredentials(login,mdp))
-                {
+            if ( SecureLoging.checkcredentials(login,mdp))
+            {
                 var page = new PageAdmin();
                 page.Show();
-                }
-                else
-                {
-                   erreur.Text = "Login ou mot de passe invalide"; 
+                this.Visible = false;
+            }
+            else
+            {
+                erreur.Text = "Login ou mot de passe invalide"; 
  
-                    }  
-                
-           
-
-         
-
+            }
 
         }
     }

@@ -22,6 +22,7 @@ namespace data_manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             // Verification de la presence de Secteur
             if (!SicilyLinesDAO.getSecteurs().Any())
             {
@@ -67,23 +68,34 @@ namespace data_manager
 
         private void InsererBtn_Click(object sender, EventArgs e)
         {
-            // Initialisation des valeurs pour la creation de l'objet
-            int add_id = SicilyLinesDAO.getAllLiaisons(listBoxSecteur.SelectedIndex).Count+1;
-            string add_duree = dureeBox.Text;
-            Secteur add_secteur = SicilyLinesDAO.getSecteurs()[listBoxSecteur.SelectedIndex];
-            Port add_depart = SicilyLinesDAO.getPorts()[DepartBox.SelectedIndex];
-            Port add_arrivee = SicilyLinesDAO.getPorts()[ArriveeBox.SelectedIndex];
+            if (SicilyLinesDAO.checkDuree(dureeBox.Text))
+            {
+                Secteur secteur = listBoxSecteur.SelectedItem as Secteur;
+                Liaison add_liaison = listBoxLiaison.SelectedItem as Liaison;
 
-            // Creation de la Liaison avec en parametre le nouvelle objet de celle-ci
-            SicilyLinesDAO.addLiaison(new Liaison(add_id, add_duree, add_secteur, add_depart, add_arrivee));
+                // Initialisation des valeurs pour la creation de l'objet
+                int add_id = SicilyLinesDAO.getAllLiaisons().Count + 1;
+                string add_duree = dureeBox.Text;
+                Secteur add_secteur = secteur;
+                Port add_depart = DepartBox.SelectedItem as Port;
+                Port add_arrivee = ArriveeBox.SelectedItem as Port;
 
-            // Actualisation de la listBoxLiaison
-            Secteur secteur = listBoxSecteur.SelectedItem as Secteur;
-            listBoxLiaison.DataSource = null;
-            listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(secteur.Id);
+                // Creation de la Liaison avec en parametre le nouvelle objet de celle-ci
+                SicilyLinesDAO.addLiaison(new Liaison(add_id, add_duree, add_secteur, add_depart, add_arrivee));
 
-            // Suppression du message "pas de liaisons"
-            pasDeLiaisons.Visible = false;
+                // Actualisation de la listBoxLiaison
+                listBoxLiaison.DataSource = null;
+                listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(secteur.Id);
+
+                // Suppression du message "pas de liaisons"
+                pasDeLiaisons.Visible = false;
+            }
+            else
+            {
+                var alert = new DureeErreur();
+                alert.Show();
+            }
+            dureeBox.Text = "";
 
         }
 
@@ -101,20 +113,31 @@ namespace data_manager
 
         private void majBtn_Click(object sender, EventArgs e)
         {
-            // Initialisation des valeurs pour la creation de l'objet
-            int maj_id = SicilyLinesDAO.getAllLiaisons(listBoxSecteur.SelectedIndex)[listBoxSecteur.SelectedIndex-1].Id;
-            string maj_duree = majBox.Text;
-            Secteur maj_secteur = SicilyLinesDAO.getSecteurs()[listBoxSecteur.SelectedIndex];
-            Port maj_depart = SicilyLinesDAO.getPorts()[DepartBox.SelectedIndex];
-            Port maj_arrivee = SicilyLinesDAO.getPorts()[ArriveeBox.SelectedIndex];
+            if (SicilyLinesDAO.checkDuree(majBox.Text))
+            {
+                Secteur secteur = listBoxSecteur.SelectedItem as Secteur;
+                Liaison maj_liaison = listBoxLiaison.SelectedItem as Liaison;
 
-            // Modification de la Liaison avec en parametre le nouvelle objet (modifié) de celle-ci
-            SicilyLinesDAO.modifLiaison(new Liaison(maj_id, maj_duree, maj_secteur, maj_depart, maj_arrivee));
+                // Initialisation des valeurs pour la creation de l'objet
+                int maj_id = maj_liaison.Id;
+                string maj_duree = majBox.Text;
+                Secteur maj_secteur = listBoxSecteur.SelectedItem as Secteur;
+                Port maj_depart = DepartBox.SelectedItem as Port;
+                Port maj_arrivee = ArriveeBox.SelectedItem as Port;
 
-            // Actualisation de listBoxLiaison
-            Secteur secteur = listBoxSecteur.SelectedItem as Secteur;
-            listBoxLiaison.DataSource = null;
-            listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(secteur.Id);
+                // Modification de la Liaison avec en parametre le nouvelle objet (modifié) de celle-ci
+                SicilyLinesDAO.modifLiaison(new Liaison(maj_id, maj_duree, maj_secteur, maj_depart, maj_arrivee));
+
+                // Actualisation de listBoxLiaison
+                listBoxLiaison.DataSource = null;
+                listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(secteur.Id);
+            }
+            else
+            {
+                var alert = new DureeErreur();
+                alert.Show();
+            }
+            majBox.Text = "";
         }
 
     }

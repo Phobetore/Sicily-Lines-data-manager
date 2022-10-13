@@ -19,7 +19,7 @@ namespace data_manager.Vue
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }

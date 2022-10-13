@@ -19,15 +19,14 @@ namespace data_manager.DAL
         private static string mdp = "ceciEstUnGrosMotDePasse";
 
 
+        // algorithm de hashage SHA256
        private static string ComputeSha256Hash(string rawData)
         {
-            // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
             {
-                // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
 
-                // Convert byte array to a string   
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+ 
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -41,6 +40,7 @@ namespace data_manager.DAL
         {
             string hashedPasswd = ComputeSha256Hash(passwd);
 
+            // preparation de la requete
             ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
             maConnexionSql.openConnection();
             string req = "Select Count(*) as nbReturn from admin where login = ?loginstr and passwd = ?passwdstr";
@@ -50,16 +50,17 @@ namespace data_manager.DAL
 
             // execution de la requete
             MySqlDataReader reader = Ocom.ExecuteReader();
-<<<<<<< HEAD
-            reader.Read();
-=======
 
->>>>>>> 9d9e190668da9d8f2d8b7f07715108d19a76dfb2
+            reader.Read();
+
+            // verification du nombre de lignes retournés
             if (Convert.ToInt32(reader["nbReturn"]) == 1)
             {
                 maConnexionSql.closeConnection();
                 return true;
             }
+
+
             maConnexionSql.closeConnection();
             return false;
         }

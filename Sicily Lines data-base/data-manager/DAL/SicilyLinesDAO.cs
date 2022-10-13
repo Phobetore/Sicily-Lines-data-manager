@@ -1,9 +1,11 @@
 ﻿using data_manager.Model;
 using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace data_manager.DAL
@@ -16,6 +18,16 @@ namespace data_manager.DAL
         private static string mdp = "ceciEstUnGrosMotDePasse";
         
 
+
+        public static bool checkDuree(string duree)
+        {
+            Regex rg = new Regex("^((([0-9][0-9][0-9])|([0-9][0-9])|([0-9]))h[0-5][0-9])$");
+            if (rg.IsMatch(duree) )
+            {
+                return true;
+            }
+            return false;
+        }
 
 
         // Récupération de la liste des Secteurs
@@ -66,7 +78,7 @@ namespace data_manager.DAL
 
 
         // Recuperation de toutes les liaisons peut importe le secteur.
-        public static List<Liaison> getAllLiaisons(int idSecteur)
+        public static List<Liaison> getAllLiaisons()
         {
 
             List<Liaison> liaisonList = new List<Liaison>();
@@ -237,7 +249,7 @@ namespace data_manager.DAL
                 // Preparationde la requete
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                string req = "update liaison set duree = '?updatedDuree' where id = ?idToUpdate";
+                string req = "update liaison set duree = ?updatedDuree where id = ?idToUpdate";
                 MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 Ocom.Parameters.Add(new MySqlParameter("updatedDuree", updatedLiaison.Duree));
                 Ocom.Parameters.Add(new MySqlParameter("idToUpdate", updatedLiaison.Id));
