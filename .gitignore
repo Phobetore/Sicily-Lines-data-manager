@@ -51,3 +51,4 @@ Thumbs.db
 #VsCode IDE
 .vs/
 obj/
+bin/
