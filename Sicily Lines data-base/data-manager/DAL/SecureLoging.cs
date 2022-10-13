@@ -50,7 +50,11 @@ namespace data_manager.DAL
 
             // execution de la requete
             MySqlDataReader reader = Ocom.ExecuteReader();
+<<<<<<< HEAD
             reader.Read();
+=======
+
+>>>>>>> 9d9e190668da9d8f2d8b7f07715108d19a76dfb2
             if (Convert.ToInt32(reader["nbReturn"]) == 1)
             {
                 maConnexionSql.closeConnection();
