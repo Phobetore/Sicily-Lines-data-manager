@@ -12,8 +12,8 @@ namespace data_manager.DAL
     {
         private static string provider = "127.0.0.1";
         private static string dataBase = "bd-sicilylines";
-        private static string uid = "root";
-        private static string mdp = "";
+        private static string uid = "dbmanager";
+        private static string mdp = "ceciEstUnGrosMotDePasse";
         
 
 
