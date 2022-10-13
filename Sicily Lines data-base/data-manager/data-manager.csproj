@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\ConnexionSql.cs" />
+    <Compile Include="DAL\SecureLoging.cs" />
     <Compile Include="DAL\SicilyLinesDAO.cs" />
     <Compile Include="Model\Liaison.cs" />
     <Compile Include="Model\Port.cs" />

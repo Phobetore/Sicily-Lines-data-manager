@@ -19,7 +19,7 @@ namespace data_manager.DAL
         private static string mdp = "ceciEstUnGrosMotDePasse";
 
 
-        static string ComputeSha256Hash(string rawData)
+        private static string ComputeSha256Hash(string rawData)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
@@ -37,7 +37,7 @@ namespace data_manager.DAL
             }
         }
 
-        public bool checkpasswd(string login, string passwd)
+        public bool checkCredential(string login, string passwd)
         {
             string hashedPasswd = ComputeSha256Hash(passwd);
 
