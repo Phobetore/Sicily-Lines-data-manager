@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace data_manager.DAL
 {
@@ -52,7 +51,7 @@ namespace data_manager.DAL
             // execution de la requete
             MySqlDataReader reader = Ocom.ExecuteReader();
 
-            if (Convert.ToInt32( reader["nbReturn"]) == 1)
+            if (Convert.ToInt32(reader["nbReturn"]) == 1)
             {
                 return true;
             }
