@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace data_manager
 {
-    public partial class Form1 : Form
+    public partial class PageAdmin : Form
     {
-        public Form1()
+        public PageAdmin()
         {
             InitializeComponent();
         }

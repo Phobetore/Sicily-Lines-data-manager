@@ -7,7 +7,6 @@ using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace data_manager.DAL
 {
@@ -20,7 +19,7 @@ namespace data_manager.DAL
         private static string mdp = "ceciEstUnGrosMotDePasse";
 
 
-        static string ComputeSha256Hash(string rawData)
+       private static string ComputeSha256Hash(string rawData)
         {
             // Create a SHA256   
             using (SHA256 sha256Hash = SHA256.Create())
@@ -38,7 +37,7 @@ namespace data_manager.DAL
             }
         }
 
-        public bool checkpasswd(string login, string passwd)
+        public static bool checkcredentials(string login, string passwd)
         {
             string hashedPasswd = ComputeSha256Hash(passwd);
 
@@ -51,11 +50,13 @@ namespace data_manager.DAL
 
             // execution de la requete
             MySqlDataReader reader = Ocom.ExecuteReader();
-
-            if (Convert.ToInt32( reader["nbReturn"]) == 1)
+            reader.Read();
+            if (Convert.ToInt32(reader["nbReturn"]) == 1)
             {
+                maConnexionSql.closeConnection();
                 return true;
             }
+            maConnexionSql.closeConnection();
             return false;
         }
 

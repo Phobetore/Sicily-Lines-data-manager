@@ -16,5 +16,10 @@ namespace data_manager.Vue
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
