@@ -139,5 +139,9 @@ namespace data_manager
             majBox.Text = "";
         }
 
+        private void PageAdmin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

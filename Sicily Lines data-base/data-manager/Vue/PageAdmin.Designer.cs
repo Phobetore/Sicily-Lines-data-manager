@@ -342,6 +342,7 @@
             this.MinimumSize = new System.Drawing.Size(722, 416);
             this.Name = "PageAdmin";
             this.Text = "Sicily Lines";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PageAdmin_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
