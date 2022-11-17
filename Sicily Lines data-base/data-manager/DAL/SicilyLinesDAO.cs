@@ -22,7 +22,7 @@ namespace data_manager.DAL
         public static bool checkDuree(string duree)
         {
             Regex rg = new Regex("^((([0-9][0-9][0-9])|([0-9][0-9])|([0-9]))h[0-5][0-9])$");
-            if (rg.IsMatch(duree) )
+            if ( rg.IsMatch(duree) )
             {
                 return true;
             }
@@ -55,7 +55,7 @@ namespace data_manager.DAL
                     int ID = (int)readerS["id"];
                     string NOM = (string)readerS["nom"];
                    
-                    // Creation de l'objet de ce seceur.
+                    // Creation de l'objet de ce secteur.
                     s = new Secteur(ID, NOM);
 
                     // Ajout de cet Liaison à la liste 

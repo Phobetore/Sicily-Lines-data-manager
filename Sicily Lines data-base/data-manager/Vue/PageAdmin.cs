@@ -71,7 +71,6 @@ namespace data_manager
             if (SicilyLinesDAO.checkDuree(dureeBox.Text))
             {
                 Secteur secteur = listBoxSecteur.SelectedItem as Secteur;
-                Liaison add_liaison = listBoxLiaison.SelectedItem as Liaison;
 
                 // Initialisation des valeurs pour la creation de l'objet
                 int add_id = SicilyLinesDAO.getAllLiaisons().Count + 1;
@@ -122,8 +121,8 @@ namespace data_manager
                 int maj_id = maj_liaison.Id;
                 string maj_duree = majBox.Text;
                 Secteur maj_secteur = listBoxSecteur.SelectedItem as Secteur;
-                Port maj_depart = DepartBox.SelectedItem as Port;
-                Port maj_arrivee = ArriveeBox.SelectedItem as Port;
+                Port maj_depart = maj_liaison.PortDepart;
+                Port maj_arrivee = maj_liaison.PortArrivee;
 
                 // Modification de la Liaison avec en parametre le nouvelle objet (modifié) de celle-ci
                 SicilyLinesDAO.modifLiaison(new Liaison(maj_id, maj_duree, maj_secteur, maj_depart, maj_arrivee));

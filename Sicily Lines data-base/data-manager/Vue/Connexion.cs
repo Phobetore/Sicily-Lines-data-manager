@@ -27,7 +27,7 @@ namespace data_manager.Vue
             string login= LoginBox.Text;
             string mdp = MdpBox.Text;
             
-            if ( SecureLoging.checkcredentials(login,mdp))
+            if ( SecureLoging.checkcredentials(login,mdp) )
             {
                 var page = new PageAdmin();
                 page.Show();

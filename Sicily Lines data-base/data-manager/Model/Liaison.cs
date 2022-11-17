@@ -31,11 +31,6 @@ namespace data_manager.Model
             this.portArrivee = portArrivee;
         }
 
-        public Liaison()
-        {
-
-        }
-
         public override string ToString()
         {
             return " - Depart : " + this.portDepart.Nom + " -  Durée : " + this.duree + " - Arrivee : " + this.portArrivee.Nom;

@@ -65,7 +65,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.logo);
             this.panel1.Location = new System.Drawing.Point(1, -3);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(707, 44);
             this.panel1.TabIndex = 1;
@@ -87,7 +87,7 @@
             this.logo.ErrorImage = null;
             this.logo.Image = global::data_manager.Properties.Resources.logo;
             this.logo.Location = new System.Drawing.Point(0, 0);
-            this.logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.logo.Margin = new System.Windows.Forms.Padding(2);
             this.logo.Name = "logo";
             this.logo.Size = new System.Drawing.Size(44, 42);
             this.logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -99,7 +99,7 @@
             this.listBoxSecteur.BackColor = System.Drawing.Color.WhiteSmoke;
             this.listBoxSecteur.FormattingEnabled = true;
             this.listBoxSecteur.Location = new System.Drawing.Point(31, 88);
-            this.listBoxSecteur.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxSecteur.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxSecteur.Name = "listBoxSecteur";
             this.listBoxSecteur.Size = new System.Drawing.Size(278, 147);
             this.listBoxSecteur.TabIndex = 3;
@@ -110,7 +110,7 @@
             this.listBoxLiaison.BackColor = System.Drawing.Color.WhiteSmoke;
             this.listBoxLiaison.FormattingEnabled = true;
             this.listBoxLiaison.Location = new System.Drawing.Point(365, 88);
-            this.listBoxLiaison.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBoxLiaison.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxLiaison.Name = "listBoxLiaison";
             this.listBoxLiaison.Size = new System.Drawing.Size(312, 147);
             this.listBoxLiaison.TabIndex = 4;
@@ -150,10 +150,10 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(61, 251);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(56, 254);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(203, 125);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
@@ -161,7 +161,7 @@
             // 
             // InsererBtn
             // 
-            this.InsererBtn.Location = new System.Drawing.Point(61, 101);
+            this.InsererBtn.Location = new System.Drawing.Point(61, 97);
             this.InsererBtn.Name = "InsererBtn";
             this.InsererBtn.Size = new System.Drawing.Size(78, 23);
             this.InsererBtn.TabIndex = 6;
@@ -227,10 +227,10 @@
             this.groupBox2.BackColor = System.Drawing.Color.SkyBlue;
             this.groupBox2.Controls.Add(this.suppBtn);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(303, 273);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Location = new System.Drawing.Point(298, 276);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(151, 101);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
@@ -240,7 +240,7 @@
             // 
             this.suppBtn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.suppBtn.Location = new System.Drawing.Point(35, 42);
-            this.suppBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.suppBtn.Margin = new System.Windows.Forms.Padding(2);
             this.suppBtn.Name = "suppBtn";
             this.suppBtn.Size = new System.Drawing.Size(78, 26);
             this.suppBtn.TabIndex = 0;
@@ -255,10 +255,10 @@
             this.groupBox3.Controls.Add(this.majBox);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(499, 273);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Location = new System.Drawing.Point(494, 276);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(156, 101);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
@@ -268,7 +268,7 @@
             // 
             this.majBtn.BackColor = System.Drawing.Color.WhiteSmoke;
             this.majBtn.Location = new System.Drawing.Point(44, 63);
-            this.majBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.majBtn.Margin = new System.Windows.Forms.Padding(2);
             this.majBtn.Name = "majBtn";
             this.majBtn.Size = new System.Drawing.Size(67, 21);
             this.majBtn.TabIndex = 2;
@@ -279,7 +279,7 @@
             // majBox
             // 
             this.majBox.Location = new System.Drawing.Point(61, 29);
-            this.majBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.majBox.Margin = new System.Windows.Forms.Padding(2);
             this.majBox.Name = "majBox";
             this.majBox.Size = new System.Drawing.Size(87, 21);
             this.majBox.TabIndex = 1;
@@ -337,7 +337,7 @@
             this.Controls.Add(this.listBoxSecteur);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximumSize = new System.Drawing.Size(722, 439);
             this.MinimumSize = new System.Drawing.Size(722, 416);
             this.Name = "PageAdmin";

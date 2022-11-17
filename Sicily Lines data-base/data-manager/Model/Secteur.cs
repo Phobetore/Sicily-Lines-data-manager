@@ -13,7 +13,6 @@ namespace data_manager.Model
         private string libelle;
 
         public int Id { get => id; set => id = value; }
-        public string Libelle { get => libelle; set => libelle = value; }
 
 
         public Secteur(int id, string libelle)
@@ -22,10 +21,6 @@ namespace data_manager.Model
             this.libelle = libelle;
         }
 
-        public Secteur()
-        {
-
-        }
 
         public override string ToString()
         {
