@@ -273,9 +273,8 @@ namespace data_manager.DAL
                 // Preparationde la requete
                 ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
                 maConnexionSql.openConnection();
-                string req = "INSERT INTO `liaison`(`id`, `id-secteur`, `port-depart`, `port-arrivee`, `duree`) VALUES (?newId, ?newSecteurId, ?newDepartId, ?newArriveeId, ?newDuree )";
+                string req = "INSERT INTO `liaison`(`id-secteur`, `port-depart`, `port-arrivee`, `duree`) VALUES ( ?newSecteurId, ?newDepartId, ?newArriveeId, ?newDuree )";
                 MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
-                Ocom.Parameters.Add(new MySqlParameter("newId", addedLiaison.Id));
                 Ocom.Parameters.Add(new MySqlParameter("newSecteurId", addedLiaison.SecteurLie.Id));
                 Ocom.Parameters.Add(new MySqlParameter("newDepartId", addedLiaison.PortDepart.Id));
                 Ocom.Parameters.Add(new MySqlParameter("newArriveeId", addedLiaison.PortArrivee.Id));
@@ -303,6 +302,115 @@ namespace data_manager.DAL
                 string req = "DELETE FROM liaison WHERE id = ?liaisonId";
                 MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
                 Ocom.Parameters.Add(new MySqlParameter("liaisonId", liaisonId));
+
+                // Execution de la requte
+                int i = Ocom.ExecuteNonQuery();
+                maConnexionSql.closeConnection();
+            }
+            catch (Exception error)
+            {
+                throw (error);
+            }
+        }
+
+
+
+
+
+        //--------------------
+        // LES TRAVERSEES
+        //--------------------
+
+        public static List<Traversee> getTraversee(int idLiaison)
+        {
+
+            List<Traversee> traverseeList = new List<Traversee>();
+
+            try
+            {
+                // Creation de lists contenant tout les liaisons
+                List<Liaison> listLiaisonDesTraversees = getAllLiaisons();
+
+                // Preparation de la requete
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                string req = "Select * from traversee where `idLiaison` = ?idLiaison ";
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
+                Ocom.Parameters.Add(new MySqlParameter("idLiaison", idLiaison));
+
+                // Execution de la requete
+                MySqlDataReader readerL = Ocom.ExecuteReader();
+
+                // Pour chaque resultat de la requete:
+                while (readerL.Read())
+                {
+                    int id = (int)readerL["id"];
+                    string date = (string)readerL["date"];
+                    //on separt les infos de la date
+                    string annee = date.Split('-')[0];
+                    string mois = date.Split('-')[1];
+                    string jour = date.Split('-')[2];
+
+                    string heure= (string)readerL["heure"];
+
+                    Liaison liaisonLie = (Liaison)listLiaisonDesTraversees[Convert.ToInt32(readerL["idLiaison"]) - 1];
+
+                    // Creation et ajout de la traversée à la list
+                    traverseeList.Add(new Traversee(id, jour, mois, annee, liaisonLie, heure));
+                }
+
+                readerL.Close();
+                maConnexionSql.closeConnection();
+
+                // Envoi de la liste des traversées
+                return traverseeList;
+            }
+
+            catch (Exception error)
+            {
+
+                throw (error);
+
+            }
+
+        }
+
+
+        // Suppression d'une traversee
+        public static void suppTraversee(int traverseeId)
+        {
+            try
+            {
+                // Preparationde la requete
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                string req = "DELETE FROM traversee WHERE id = ?traverseeId";
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
+                Ocom.Parameters.Add(new MySqlParameter("traverseeId", traverseeId));
+
+                // Execution de la requte
+                int i = Ocom.ExecuteNonQuery();
+                maConnexionSql.closeConnection();
+            }
+            catch (Exception error)
+            {
+                throw (error);
+            }
+        }
+
+
+        public static void addTraversee(Traversee AddedTraversee)
+        {
+            try
+            {
+                // Preparationde la requete
+                ConnexionSql maConnexionSql = ConnexionSql.getInstance(provider, dataBase, uid, mdp);
+                maConnexionSql.openConnection();
+                string req = "INSERT INTO `traversee`(`date`, `heure`, `idBateau`, `idLiaison`) VALUES ( ?date, ?heure, 1, ?idLiaison )";
+                MySqlCommand Ocom = new MySqlCommand(req, maConnexionSql.getmysalCn());
+                Ocom.Parameters.Add(new MySqlParameter("date", AddedTraversee.Annee+"-"+AddedTraversee.Mois+"-"+AddedTraversee.Jour));
+                Ocom.Parameters.Add(new MySqlParameter("heure", AddedTraversee.Heure));
+                Ocom.Parameters.Add(new MySqlParameter("idLiaison", AddedTraversee.LiaisonLie.Id));
 
                 // Execution de la requte
                 int i = Ocom.ExecuteNonQuery();

@@ -54,14 +54,17 @@ namespace data_manager
             {
                 // Affichage du message "pas de liaisons"
                 pasDeLiaisons.Visible = true;
+                pasdetraversee.Visible = true;
             }
             else
             {
                 // Suppression du message "pas de liaisons"
                 pasDeLiaisons.Visible = false;
+                pasdetraversee.Visible = false;
 
                 // Affichage des Liaisons dans la listBox
                 listBoxLiaison.DataSource = SicilyLinesDAO.getLiaisons(secteur.Id);
+                listBoxLiaison.SelectedIndex = 0;
             }
 
         }
@@ -98,7 +101,7 @@ namespace data_manager
 
         }
 
-        private void suppBtn_Click(object sender, EventArgs e)
+        private void suppBtnLi_Click(object sender, EventArgs e)
         {
             // Extraction du secteur et de la liaison selectionnés
             Secteur secteur = listBoxSecteur.SelectedItem as Secteur;
@@ -139,9 +142,79 @@ namespace data_manager
             majBox.Text = "";
         }
 
+
+        private void listBoxLiaison_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Liaison liaison = listBoxLiaison.SelectedItem as Liaison;
+
+            // Actualisation de la listBox
+            listBoxTraversee.DataSource = null;
+
+            if (liaison == null || !SicilyLinesDAO.getTraversee(liaison.Id).Any())
+            {
+                // Affichage du message "pas de liaisons"
+                pasdetraversee.Visible = true;
+            }
+            else
+            {
+                // Suppression du message "pase liaisons"
+                pasdetraversee.Visible = false;
+
+                // Affichage des Liaisons dans la listBox
+                listBoxTraversee.DataSource = SicilyLinesDAO.getTraversee(liaison.Id);
+            }
+        }
+
+
         private void PageAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void suppBtnTra_Click(object sender, EventArgs e)
+        {
+            // Extraction de la liaison et de la traversée selectionnées
+            Liaison liaison = listBoxLiaison.SelectedItem as Liaison;
+            Traversee supp_treaversee = listBoxTraversee.SelectedItem as Traversee;
+
+            // Envoie de l'id du secteur et de la listBoxLiaison pour actualiser, de la liaison à supp.
+            var suppConfirmation = new ConfirmerSuppTra(supp_treaversee, listBoxTraversee, liaison.Id);
+            suppConfirmation.Show();
+        }
+
+        private void insertTra_Click(object sender, EventArgs e)
+        {
+            if (SicilyLinesDAO.checkDuree(heureBox.Text))
+            {
+                Liaison liaison = listBoxLiaison.SelectedItem as Liaison;
+
+                // Initialisation des valeurs pour la creation de l'objet
+                int add_id = SicilyLinesDAO.getAllLiaisons().Count + 1;
+                string add_heure = heureBox.Text;
+                Liaison add_liaison = liaison;
+                string jour = textBoxJour.Text;
+                string mois = textBoxMois.Text;
+                string annee = textBoxAnnee.Text;
+
+                // Creation de la Liaison avec en parametre le nouvelle objet de celle-ci
+                SicilyLinesDAO.addTraversee(new Traversee(add_id, jour, mois, annee, add_liaison, add_heure));
+
+                // Actualisation de la listBoxLiaison
+                listBoxTraversee.DataSource = null;
+                listBoxTraversee.DataSource = SicilyLinesDAO.getTraversee(liaison.Id);
+
+                // Suppression du message "pas de liaisons"
+                pasdetraversee.Visible = false;
+            }
+            else
+            {
+                var alert = new DureeErreur();
+                alert.Show();
+            }
+            heureBox.Text = "";
+            textBoxAnnee.Text = "";
+            textBoxJour.Text = "";
+            textBoxMois.Text = "";
         }
     }
 }
