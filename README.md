@@ -4,7 +4,7 @@ Sicily Lines est une compagnie maritime privée qui opère sur la côte italienn
 
 <br>
 
-Dans le cadre de mes etudes on m'a donnée une mission fictive consistant à developper le logicielle de gestion de base de données de cette entreprise.
+Dans le cadre de mes études on m'a donnée une mission fictive consistant à developper le logiciel de gestion de base de données de cette entreprise.
 
 ## Avant de lancer
 
@@ -15,6 +15,6 @@ Login: admin
 Password: admin
 
 
-Bien evidement ce sont des identifiant qui ne deveront pas être utilisés en prod.
+Bien evidement ce sont des identifiants qui ne deveront pas être utilisés en prod.
 
-La creation de la base de données ainsi que de l'utilisateur sont dans le fichier sql. il suffit de l'importer sur phpmyadmin directement
+La creation de la base de données ainsi que de l'utilisateur sont inclu dans le fichier sql. Il suffit de l'importer sur phpmyadmin (ou autre) directement.
