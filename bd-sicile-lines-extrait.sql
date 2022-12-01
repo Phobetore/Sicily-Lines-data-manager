@@ -1,22 +1,11 @@
-CREATE DATABASE IF NOT EXISTS `bd-sicilylines`;
-DROP USER IF EXISTS 'dbmanager'@'localhost';
-CREATE USER 'dbmanager'@'localhost'
-  IDENTIFIED BY 'ceciEstUnGrosMotDePasse';
-GRANT ALL
-  ON *.*
-  TO 'dbmanager'@'localhost'
-  WITH GRANT OPTION;
-
-
-
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 18 nov. 2022 à 11:43
+-- Généré le : jeu. 01 déc. 2022 à 09:49
 -- Version du serveur : 5.7.36
--- Version de PHP : 8.1.0
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,9 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bd-sicilylines`
 --
-
-
-USE `bd-sicilylines`;
 
 -- --------------------------------------------------------
 
@@ -64,7 +50,7 @@ INSERT INTO `admin` (`id`, `login`, `passwd`) VALUES
 
 DROP TABLE IF EXISTS `bateau`;
 CREATE TABLE IF NOT EXISTS `bateau` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) DEFAULT NULL,
   `longuer` varchar(100) DEFAULT NULL,
   `largeur` varchar(100) DEFAULT NULL,
@@ -91,7 +77,7 @@ INSERT INTO `bateau` (`id`, `nom`, `longuer`, `largeur`, `vitesse`) VALUES
 
 DROP TABLE IF EXISTS `categorie`;
 CREATE TABLE IF NOT EXISTS `categorie` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -113,7 +99,7 @@ INSERT INTO `categorie` (`id`, `libelle`) VALUES
 
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) DEFAULT NULL,
   `prenom` varchar(100) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -131,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 
 DROP TABLE IF EXISTS `contenir`;
 CREATE TABLE IF NOT EXISTS `contenir` (
-  `nbMax` int(25) NOT NULL,
+  `nbMax` int(25) NOT NULL AUTO_INCREMENT,
   `idBateau` int(11) NOT NULL,
   `idCate` int(11) NOT NULL,
   PRIMARY KEY (`nbMax`),
@@ -147,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `contenir` (
 
 DROP TABLE IF EXISTS `equipement`;
 CREATE TABLE IF NOT EXISTS `equipement` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -179,19 +165,22 @@ CREATE TABLE IF NOT EXISTS `liaison` (
   KEY `idSecteur` (`id-secteur`),
   KEY `portDepart` (`port-depart`),
   KEY `portArrivee` (`port-arrivee`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `liaison`
 --
 
 INSERT INTO `liaison` (`id`, `duree`, `id-secteur`, `port-depart`, `port-arrivee`) VALUES
-(1, '5h10', 1, 3, 4),
-(2, '80h40', 1, 1, 7),
-(3, '10h10', 3, 6, 2),
-(4, '70h50', 3, 9, 2),
-(8, '5h40', 4, 3, 8),
-(9, '70h10', 4, 5, 10);
+(10, '700', 1, 8, 6),
+(11, '50mm', 3, 3, 6),
+(15, '1h30', 1, 1, 5),
+(16, '1h25', 2, 2, 7),
+(17, '1h45', 2, 2, 8),
+(19, '2h50', 2, 2, 9),
+(21, '30mm', 4, 4, 11),
+(24, '4h', 1, 1, 6),
+(25, '40mm', 3, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -201,7 +190,7 @@ INSERT INTO `liaison` (`id`, `duree`, `id-secteur`, `port-depart`, `port-arrivee
 
 DROP TABLE IF EXISTS `participer`;
 CREATE TABLE IF NOT EXISTS `participer` (
-  `nombre` int(11) NOT NULL,
+  `nombre` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`nombre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -213,7 +202,7 @@ CREATE TABLE IF NOT EXISTS `participer` (
 
 DROP TABLE IF EXISTS `periode`;
 CREATE TABLE IF NOT EXISTS `periode` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `dateDebut` date DEFAULT NULL,
   `dateFin` date DEFAULT NULL,
   `tarifer_periode` int(20) NOT NULL,
@@ -228,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `periode` (
 
 DROP TABLE IF EXISTS `port`;
 CREATE TABLE IF NOT EXISTS `port` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -274,10 +263,10 @@ CREATE TABLE IF NOT EXISTS `proposer` (
 
 DROP TABLE IF EXISTS `reservation`;
 CREATE TABLE IF NOT EXISTS `reservation` (
-  `id` int(11) NOT NULL,
-  `idClient` int(3) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idClient` int(3) NOT NULL ,
   `nombreP` int(25) NOT NULL,
-  `idTraversee` int(11) DEFAULT NULL,
+  `idTraversee` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idClient` (`idClient`),
   KEY `nombreP` (`nombreP`),
@@ -332,23 +321,21 @@ CREATE TABLE IF NOT EXISTS `tarifer` (
 DROP TABLE IF EXISTS `traversee`;
 CREATE TABLE IF NOT EXISTS `traversee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` varchar(10) DEFAULT NULL,
+  `date` date DEFAULT NULL,
   `heure` varchar(255) DEFAULT NULL,
   `idBateau` int(11) NOT NULL,
-  `idLiaison` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idBateau` (`idBateau`),
-  KEY `idLiaison` (`idLiaison`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+  KEY `idBateau` (`idBateau`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `traversee`
 --
 
-INSERT INTO `traversee` (`id`, `date`, `heure`, `idBateau`, `idLiaison`) VALUES
-(4, '2022-12-10', '5h20', 1, 3),
-(6, '2021-9-21', '09h15', 1, 2),
-(7, '2023-8-10', '5h10', 1, 1);
+INSERT INTO `traversee` (`id`, `date`, `heure`, `idBateau`) VALUES
+(1, '2021-09-21', '07:45', 3),
+(2, '2021-09-21', '09:15', 4),
+(3, '2021-09-21', '10:50', 5);
 
 -- --------------------------------------------------------
 
@@ -358,7 +345,7 @@ INSERT INTO `traversee` (`id`, `date`, `heure`, `idBateau`, `idLiaison`) VALUES
 
 DROP TABLE IF EXISTS `type`;
 CREATE TABLE IF NOT EXISTS `type` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(100) DEFAULT NULL,
   `nombreP` int(25) NOT NULL,
   PRIMARY KEY (`id`),
