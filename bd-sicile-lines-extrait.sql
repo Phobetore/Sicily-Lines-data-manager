@@ -3,7 +3,7 @@ DROP USER IF EXISTS 'dbmanager'@'localhost';
 CREATE USER 'dbmanager'@'localhost'
   IDENTIFIED BY 'ceciEstUnGrosMotDePasse';
 GRANT ALL
-  ON *.*
+  ON bd-sicilylines.*
   TO 'dbmanager'@'localhost'
   WITH GRANT OPTION;
 
