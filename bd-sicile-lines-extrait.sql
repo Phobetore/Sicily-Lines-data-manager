@@ -1,3 +1,13 @@
+CREATE DATABASE IF NOT EXISTS `bd-sicilylines`;
+DROP USER IF EXISTS 'dbmanager'@'localhost';
+CREATE USER 'dbmanager'@'localhost'
+  IDENTIFIED BY 'ceciEstUnGrosMotDePasse';
+GRANT ALL
+  ON *.*
+  TO 'dbmanager'@'localhost'
+  WITH GRANT OPTION;
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
@@ -20,6 +30,13 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bd-sicilylines`
 --
+
+
+
+USE `bd-sicilylines`;
+
+
+
 
 -- --------------------------------------------------------
 
