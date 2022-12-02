@@ -189,15 +189,15 @@ CREATE TABLE IF NOT EXISTS `liaison` (
 --
 
 INSERT INTO `liaison` (`id`, `duree`, `id-secteur`, `port-depart`, `port-arrivee`) VALUES
-(10, '700', 1, 8, 6),
-(11, '50mm', 3, 3, 6),
-(15, '1h30', 1, 1, 5),
-(16, '1h25', 2, 2, 7),
-(17, '1h45', 2, 2, 8),
-(19, '2h50', 2, 2, 9),
-(21, '30mm', 4, 4, 11),
-(24, '4h', 1, 1, 6),
-(25, '40mm', 3, 3, 8);
+(1, '700', 1, 8, 6),
+(2, '50mm', 3, 3, 6),
+(3, '1h30', 1, 1, 5),
+(4, '1h25', 2, 2, 7),
+(5, '1h45', 2, 2, 8),
+(6, '2h50', 2, 2, 9),
+(8, '30mm', 4, 4, 11),
+(7, '4h', 1, 1, 6),
+(9, '40mm', 3, 3, 8);
 
 -- --------------------------------------------------------
 
@@ -330,7 +330,6 @@ CREATE TABLE IF NOT EXISTS `tarifer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
-
 --
 -- Structure de la table `traversee`
 --
@@ -338,21 +337,23 @@ CREATE TABLE IF NOT EXISTS `tarifer` (
 DROP TABLE IF EXISTS `traversee`;
 CREATE TABLE IF NOT EXISTS `traversee` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `date` date DEFAULT NULL,
+  `date` varchar(10) DEFAULT NULL,
   `heure` varchar(255) DEFAULT NULL,
   `idBateau` int(11) NOT NULL,
+  `idLiaison` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `idBateau` (`idBateau`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `idBateau` (`idBateau`),
+  KEY `idLiaison` (`idLiaison`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `traversee`
 --
 
-INSERT INTO `traversee` (`id`, `date`, `heure`, `idBateau`) VALUES
-(1, '2021-09-21', '07:45', 3),
-(2, '2021-09-21', '09:15', 4),
-(3, '2021-09-21', '10:50', 5);
+INSERT INTO `traversee` (`id`, `date`, `heure`, `idBateau`, `idLiaison`) VALUES
+(4, '2022-12-10', '5h20', 1, 3),
+(6, '2021-9-21', '09h15', 1, 2),
+(7, '2023-8-10', '5h10', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -362,7 +363,7 @@ INSERT INTO `traversee` (`id`, `date`, `heure`, `idBateau`) VALUES
 
 DROP TABLE IF EXISTS `type`;
 CREATE TABLE IF NOT EXISTS `type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `libelle` varchar(100) DEFAULT NULL,
   `nombreP` int(25) NOT NULL,
   PRIMARY KEY (`id`),
